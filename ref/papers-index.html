@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Papers — Student Research Society</title>
+  <meta name="description" content="Papers guides students from a research question to a published paper — a year-long research society at Phillips Academy Andover." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Playfair+Display:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" />
+  <style>
+    /* ── FONTS ── */
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+    /* ── LOCALFORGE DESIGN TOKENS (exact) ── */
+    :root {
+      --color-paper: #FAFAFA;
+      --color-paper-warm: #F8F7F4;
+      --color-ink: #2D2D2D;
+      --color-graphite: #5C5C5C;
+      --color-line-light: #CACACA;
+      --color-line-med: #9E9E9E;
+      --color-line-dark: #4A4A4A;
+      --color-dim-blue: #4A90D9;
+      --color-accent-red: #D64545;
+      --color-section-fill: #E8E8E8;
+      --color-grid: #E8E8E8;
+      --navy: #1a3a5c;
+    }
+
+    /* ── RESET ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── BODY + GRID BACKGROUND ── */
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background-color: var(--color-paper);
+      color: var(--color-ink);
+      background-image:
+        linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+      background-size: 20px 20px;
+      font-size: 17px;
+      line-height: 1.75;
+      padding-top: 50px;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── DRAWING FRAME ── */
+    .card {
+      border: 2px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      padding: 48px;
+      background: var(--color-paper);
+      position: relative;
+    }
+
+    .card-sm {
+      border: 1.5px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      padding: 32px 28px;
+      background: var(--color-paper);
+      position: relative;
+    }
+
+    .hatch-pattern {
+      background-image: repeating-linear-gradient(
+        45deg, transparent, transparent 4px,
+        var(--color-line-light) 4px, var(--color-line-light) 5px
+      );
+    }
+
+    /* ── HAMBURGER (hidden on desktop) ── */
+    .nav-hamburger { display: none; }
+
+    /* ── NAV ── */
+    header {
+      position: sticky;
+      top: 50px;
+      z-index: 100;
+      background-color: color-mix(in srgb, var(--color-paper) 80%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-line-light);
+      padding: 18px 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.06em;
+      color: var(--color-ink);
+      margin-right: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
+      transition: color 0.15s;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-links a:not(.btn-apply)::before,
+    .nav-links a:not(.btn-apply)::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--color-dim-blue);
+      transform: scaleX(0);
+      transition: transform 0.22s ease;
+    }
+    .nav-links a:not(.btn-apply)::before { top: 0; transform-origin: left; }
+    .nav-links a:not(.btn-apply)::after  { bottom: 0; transform-origin: right; }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--color-ink); }
+
+    .nav-links a:not(.btn-apply):hover::before,
+    .nav-links a:not(.btn-apply):hover::after,
+    .nav-links a.active:not(.btn-apply)::before,
+    .nav-links a.active:not(.btn-apply)::after { transform: scaleX(1); }
+
+    /* ── BUTTONS ── */
+    .btn-apply {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 52px;
+      background: var(--color-dim-blue);
+      color: #fff;
+      border: 2px solid var(--color-ink);
+      cursor: pointer;
+      display: inline-block;
+      transition: opacity 0.12s;
+    }
+
+    a.btn-apply,
+    a.btn-apply:hover { color: #fff; }
+
+    .nav .btn-apply {
+      background: transparent;
+      color: var(--color-graphite);
+      border-color: transparent;
+      padding: 5px 0;
+    }
+    .nav a.btn-apply,
+    .nav a.btn-apply:hover { color: var(--color-graphite); }
+    .nav .btn-apply:hover { opacity: 1; color: var(--color-ink); }
+
+    .btn-apply:hover { opacity: 0.78; }
+
+    .btn-outline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 11px 26px;
+      background: transparent;
+      color: var(--color-ink);
+      border: 1.5px solid var(--color-line-dark);
+      display: inline-block;
+      transition: all 0.12s;
+    }
+
+    .btn-outline:hover { background: var(--color-ink); color: var(--color-paper); }
+
+    /* ── FIXED ANNOUNCE BAR ── */
+    .announce-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 300;
+      height: 50px;
+      background: var(--navy);
+    }
+
+    .announce-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .announce-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .btn-announce {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.55);
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: background 0.12s;
+    }
+
+    .btn-announce:hover { background: rgba(255,255,255,0.28); color: #fff; }
+
+    @media (max-width: 600px) {
+      .announce-inner { padding: 0 20px; }
+      .announce-text { font-size: 10px; letter-spacing: 0.08em; }
+    }
+
+    /* ── HERO ── */
+    .hero { padding: 60px 0; }
+
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(64px, 10vw, 110px);
+      font-weight: 700;
+      line-height: 0.95;
+      color: var(--color-ink);
+      margin-bottom: 36px;
+      letter-spacing: -0.02em;
+    }
+
+    .ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 60px 0; }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: 28px;
+      line-height: 1.1;
+    }
+
+    .body-text {
+      font-size: 15px;
+      color: var(--color-graphite);
+      line-height: 1.9;
+      max-width: 680px;
+      margin-bottom: 18px;
+    }
+
+    /* ── CARD GRIDS ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 1000px) {
+      .grid-5 { grid-template-columns: repeat(2, 1fr); }
+      .grid-5 .card-sm:last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+    }
+
+    .card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .card-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--color-line-med);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .card-body {
+      font-size: 14px;
+      color: var(--color-graphite);
+      line-height: 1.8;
+    }
+
+    .card-body strong { color: var(--color-ink); font-weight: 600; }
+
+    /* ── JOIN BOX ── */
+    .join-box {
+      border: 2px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      padding: 56px 48px;
+      background: var(--color-ink);
+    }
+
+    .join-box h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--color-paper);
+      margin-bottom: 16px;
+    }
+
+    .join-box p {
+      font-size: 16px;
+      color: var(--color-line-med);
+      max-width: 500px;
+      margin-bottom: 36px;
+      line-height: 1.85;
+    }
+
+    .join-box .btn-apply { background: var(--color-paper); color: var(--color-ink); }
+    .join-box .btn-apply:hover { opacity: 0.85; }
+    .join-box .btn-outline { color: var(--color-paper); border-color: var(--color-line-dark); }
+    .join-box .btn-outline:hover { background: var(--color-paper); color: var(--color-ink); }
+
+    /* ── PAPER LIST (shared with journal) ── */
+    .paper-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
+      margin-bottom: 10px;
+    }
+
+    .paper-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--color-ink);
+      display: block;
+      margin-bottom: 8px;
+      line-height: 1.25;
+      transition: color 0.12s;
+    }
+    .paper-title:hover { color: var(--navy); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--color-line-light);
+      padding: 48px 0;
+      background: var(--color-paper-warm);
+      background-image:
+        linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      color: var(--color-ink);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .footer-desc {
+      font-size: 13px;
+      color: var(--color-graphite);
+      max-width: 260px;
+      line-height: 1.7;
+    }
+
+    .footer-links { display: flex; gap: 48px; flex-wrap: wrap; }
+
+    .footer-col h4 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
+      margin-bottom: 14px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: var(--color-graphite);
+      margin-bottom: 10px;
+      transition: color 0.12s;
+    }
+    .footer-col a:hover { color: var(--color-ink); }
+
+    .footer-bottom {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-line-light);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--color-graphite);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ── SOCIAL ICONS (footer) ── */
+    .footer-social { display: flex; gap: 6px; margin-top: 18px; }
+
+    .footer-social-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      color: var(--color-graphite);
+      border: 1px solid var(--color-line-light);
+      border-radius: 10px;
+      transition: color 0.18s, border-color 0.18s, background 0.18s;
+    }
+    .footer-social-link:hover {
+      color: var(--color-ink);
+      border-color: var(--color-line-dark);
+      background: var(--color-section-fill);
+    }
+    .footer-social-link svg { width: 17px; height: 17px; }
+
+    .footer-social-tip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: var(--color-ink);
+      color: var(--color-paper);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.16s, transform 0.16s;
+      z-index: 10;
+    }
+    .footer-social-tip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: var(--color-ink);
+    }
+    .footer-social-link:hover .footer-social-tip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── WAVE FOOTER VARIANT ── */
+    .wave-footer {
+      background: var(--color-ink);
+      color: var(--color-paper);
+      position: relative;
+      overflow: hidden;
+      border-top: none;
+    }
+    .wave-footer .footer-inner { padding-top: 52px; }
+    .wave-footer .footer-logo { color: var(--color-paper); }
+    .wave-footer .footer-desc { color: rgba(255,255,255,0.45); }
+    .wave-footer .footer-col h4 { color: rgba(255,255,255,0.35); }
+    .wave-footer .footer-col a { color: rgba(255,255,255,0.55); }
+    .wave-footer .footer-col a:hover { color: #fff; }
+    .wave-footer .footer-bottom {
+      color: rgba(255,255,255,0.3);
+      border-top-color: rgba(255,255,255,0.08);
+    }
+    .wave-footer .btn-back-top {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.15s;
+    }
+    .wave-footer .btn-back-top:hover { color: #fff; }
+
+    /* ── CANVAS GRID BG ── */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 8px; }
+    .faq-item { border-bottom: 1px solid var(--color-line-light); }
+    .faq-item:first-child { border-top: 1px solid var(--color-line-light); }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 17px;
+      color: var(--color-ink);
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 18px;
+      color: var(--color-graphite);
+      transition: transform 0.2s ease;
+    }
+    .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+    .faq-question[aria-expanded="true"] + .faq-answer { max-height: 300px; }
+
+    .faq-answer p {
+      margin: 0;
+      padding: 0 4px 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--color-graphite);
+    }
+
+    @media (max-width: 900px) {
+      .faq-question { font-size: 15px; padding: 16px 2px; }
+    }
+
+    /* ════════════════════════════════════════
+       HOMEPAGE — NON-TRIVIAL BOILERPLATE
+       ════════════════════════════════════════ */
+
+    .hp-hero { padding: 76px 0 60px; text-align: center; }
+    .hp-hero .eyebrow { text-align: center; }
+
+    .hp-hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(40px, 6.5vw, 82px);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      max-width: 14ch;
+      margin: 0 auto 26px;
+    }
+
+    .hp-hero-sub {
+      font-size: 18px;
+      color: var(--color-graphite);
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto 34px;
+    }
+
+    .hp-hero-ctas {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hp-stat {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 40px;
+    }
+    .hp-stat-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-ink);
+    }
+    .hp-stat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
+    }
+
+    .hp-logos-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-line-med);
+      margin-bottom: 18px;
+    }
+    .hp-logo-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .hp-logo-chip {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--color-graphite);
+      border: 1px solid var(--color-line-light);
+      padding: 7px 14px;
+      background: var(--color-paper);
+    }
+
+    .hp-head { text-align: center; max-width: 640px; margin: 0 auto 44px; }
+    .hp-head .eyebrow { text-align: center; }
+    .hp-head h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--color-ink);
+      margin-bottom: 16px;
+    }
+    .hp-head p { font-size: 16px; color: var(--color-graphite); line-height: 1.7; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: stretch;
+      gap: 0;
+    }
+    .flow-step {
+      border: 1.5px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      background: var(--color-paper);
+      padding: 34px 28px;
+      text-align: left;
+    }
+    .flow-step .card-label { margin-bottom: 22px; }
+    .flow-step h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: 12px;
+    }
+    .flow-step p { font-size: 14px; color: var(--color-graphite); line-height: 1.75; }
+    .flow-step .flow-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-dim-blue);
+      display: block;
+      margin-top: 18px;
+    }
+    .flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 26px;
+      color: var(--color-dim-blue);
+      padding: 0 14px;
+    }
+    .flow-cta { text-align: center; margin-top: 32px; }
+
+    @media (max-width: 860px) {
+      .flow { grid-template-columns: 1fr; }
+      .flow-arrow { transform: rotate(90deg); padding: 12px 0; }
+    }
+
+    .spotlight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 2px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      background: var(--color-paper);
+    }
+    .spotlight-img { overflow: hidden; min-height: 380px; }
+    .spotlight-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .spotlight-body { padding: 48px; }
+    .spotlight-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--color-ink);
+      margin: 18px 0 26px;
+    }
+    .spotlight-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-ink);
+      margin-bottom: 4px;
+    }
+    .spotlight-role {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--color-graphite);
+      line-height: 1.5;
+    }
+    @media (max-width: 760px) {
+      .spotlight { grid-template-columns: 1fr; }
+      .spotlight-img { min-height: 260px; }
+      .spotlight-body { padding: 32px 24px; }
+    }
+
+    .tgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+    }
+    .tcard {
+      border: 1.5px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      background: var(--color-paper);
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+    }
+    .tcard-quote {
+      font-size: 15px;
+      color: var(--color-ink);
+      line-height: 1.65;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .tcard-foot { display: flex; align-items: center; gap: 12px; }
+    .tcard-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px; font-weight: 600;
+      flex-shrink: 0;
+    }
+    .tcard-avatar.alt { background: var(--color-dim-blue); }
+    .tcard-avatar.alt2 { background: var(--color-accent-red); }
+    .tcard-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--color-ink);
+    }
+    .tcard-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
+    }
+
+    .disc-group { margin-bottom: 48px; }
+    .disc-head {
+      display: flex; align-items: baseline; gap: 14px;
+      border-bottom: 1px solid var(--color-line-light);
+      padding-bottom: 12px; margin-bottom: 22px;
+    }
+    .disc-head h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px; font-weight: 700; color: var(--color-ink);
+    }
+    .disc-head .disc-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; color: var(--color-line-med);
+      letter-spacing: 0.1em;
+    }
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+    }
+    .proj-card {
+      border: 1.5px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      background: var(--color-paper);
+      padding: 26px 24px;
+      transition: transform 0.14s ease, box-shadow 0.14s ease;
+    }
+    .proj-card:hover {
+      transform: translateY(-3px);
+      box-shadow: inset 0 0 0 1px var(--color-line-med), 0 12px 24px -10px rgba(45,45,45,0.22);
+    }
+    .proj-card .paper-meta { margin-bottom: 10px; }
+    .proj-card .proj-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px; font-weight: 600;
+      line-height: 1.3; color: var(--color-ink);
+    }
+    .disc-cta { text-align: center; margin-top: 12px; }
+
+    .partner-row {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      max-width: 900px; margin: 0 auto;
+    }
+    .partner-chip {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; letter-spacing: 0.04em;
+      color: var(--color-graphite);
+      border: 1px solid var(--color-line-light);
+      padding: 10px 16px; background: var(--color-paper);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .partner-chip:hover { border-color: var(--color-line-dark); color: var(--color-ink); }
+
+    .speaker-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    }
+    .speaker-card {
+      border: 1.5px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      background: var(--color-paper);
+      padding: 32px 24px; text-align: center;
+    }
+    .speaker-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--color-section-fill);
+      border: 1.5px solid var(--color-line-med);
+      color: var(--color-graphite);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 20px; font-weight: 600;
+      margin: 0 auto 18px;
+    }
+    .speaker-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 19px; font-weight: 600; color: var(--color-ink);
+      margin-bottom: 6px;
+    }
+    .speaker-role {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--color-dim-blue); margin-bottom: 12px;
+    }
+    .speaker-bio { font-size: 13px; color: var(--color-graphite); line-height: 1.6; }
+    @media (max-width: 900px) { .speaker-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .speaker-grid { grid-template-columns: 1fr; } }
+
+    .apply-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+    .apply-step {
+      border: 1.5px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+      background: var(--color-paper);
+      padding: 28px 24px;
+    }
+    .apply-step .card-num { font-size: 22px; color: var(--color-dim-blue); margin-bottom: 14px; }
+    .apply-step h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px; font-weight: 600; color: var(--color-ink); margin-bottom: 8px;
+    }
+    .apply-step p { font-size: 13px; color: var(--color-graphite); line-height: 1.65; }
+    @media (max-width: 900px) { .apply-steps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .apply-steps { grid-template-columns: 1fr; } }
+
+    .cta-final { display: grid; grid-template-columns: 1.1fr 0.9fr; }
+    .cta-final-body {
+      background: var(--color-ink);
+      padding: 56px 48px;
+      border: 2px solid var(--color-line-dark);
+      box-shadow: inset 0 0 0 1px var(--color-line-med);
+    }
+    .cta-final-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 700; color: var(--color-paper);
+      line-height: 1.08; margin-bottom: 18px;
+    }
+    .cta-final-body > p { color: var(--color-line-med); font-size: 16px; line-height: 1.8; margin-bottom: 30px; max-width: 460px; }
+    .benefit-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px;
+      margin-bottom: 34px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .benefit { background: var(--color-ink); padding: 18px 16px; text-align: center; }
+    .benefit-val {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 15px; font-weight: 600; color: var(--color-paper); margin-bottom: 4px;
+    }
+    .benefit-lbl {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .cta-final-img { overflow: hidden; min-height: 100%; }
+    .cta-final-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (max-width: 820px) {
+      .cta-final { grid-template-columns: 1fr; }
+      .cta-final-img { min-height: 260px; }
+      .cta-final-body { padding: 40px 24px; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      .nav-hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        margin-left: auto;
+        flex-shrink: 0;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--color-ink);
+        border-radius: 1px;
+        transition: transform 0.22s ease, opacity 0.22s ease;
+        transform-origin: center;
+      }
+      .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-paper);
+        border-bottom: 2px solid var(--color-line-dark);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 24px 28px;
+        gap: 0;
+        z-index: 10;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a {
+        width: 100%;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--color-line-light);
+        font-size: 12px;
+      }
+      .nav-links a:last-child { border-bottom: none; }
+      .nav-links a:not(.btn-apply)::before,
+      .nav-links a:not(.btn-apply)::after { display: none; }
+
+      .section { padding: 32px 0; }
+      .hero { padding: 32px 0; }
+      .card { padding: 28px 20px; }
+      .card-sm { padding: 22px 18px; }
+      .join-box { padding: 36px 20px; }
+      .join-box h2 { font-size: clamp(24px, 7vw, 36px); }
+
+      .footer-inner { gap: 28px; }
+      .footer-links { gap: 24px; flex-direction: column; }
+      .wave-footer .footer-inner { padding-top: 36px; }
+
+      .announce-text {
+        max-width: 55%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .card { padding: 36px 32px; }
+      .card-sm { padding: 28px 24px; }
+      .join-box { padding: 48px 36px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- FIXED ANNOUNCE BAR -->
+  <div class="announce-bar">
+    <div class="announce-inner">
+      <span class="announce-text">Applications for the 2026 Summer Cohort are open.</span>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSctlZXgGbNG_R5aiHQYVtS1sK2Sh-Knr50_ApkQGfcB1JdCrA/viewform?usp=header" class="btn-announce">Apply Now</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="nav-logo">Papers</a>
+        <div class="nav-links" id="nav-links">
+          <a href="journal.html">Journal</a>
+          <a href="curriculum.html">Curriculum</a>
+          <a href="opportunities.html">Opportunities</a>
+          <a href="donate.html">Donate</a>
+          <a href="join.html" class="btn-apply">Join</a>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hp-hero">
+    <div class="container">
+      <span class="eyebrow">Phillips Academy Andover · Student Research Society</span>
+      <h1>Start your research before college.</h1>
+      <p class="hp-hero-sub">Join a community of student researchers taking on original questions across every field — from a first idea all the way to a published paper.</p>
+      <div class="hp-hero-ctas">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSctlZXgGbNG_R5aiHQYVtS1sK2Sh-Knr50_ApkQGfcB1JdCrA/viewform?usp=header" class="btn-apply">Apply Now</a>
+        <a href="journal.html" class="btn-outline">Explore the Journal</a>
+      </div>
+      <div class="hp-stat">
+        <span class="hp-stat-num" data-count="22">22</span>
+        <span class="hp-stat-label">Active research projects · Spring 2026</span>
+      </div>
+      <p class="hp-logos-label">Members submit their work to</p>
+      <div class="hp-logo-row">
+        <span class="hp-logo-chip">Regeneron STS</span>
+        <span class="hp-logo-chip">ISEF</span>
+        <span class="hp-logo-chip">The Concord Review</span>
+        <span class="hp-logo-chip">JEI</span>
+        <span class="hp-logo-chip">NHSJS</span>
+        <span class="hp-logo-chip">Columbia JSJ</span>
+        <span class="hp-logo-chip">John Locke</span>
+        <span class="hp-logo-chip">Davidson Fellows</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-TERM FLOW -->
+  <section class="section">
+    <div class="container">
+      <div class="hp-head">
+        <span class="eyebrow">The Program</span>
+        <h2>From question to publication in one year.</h2>
+        <p>A structured, three-term research framework. Every member moves through the same path — question, research, publication — with the board and their chapter alongside them.</p>
+      </div>
+      <div class="flow">
+        <div class="flow-step">
+          <span class="card-label">Fall Term</span>
+          <h3>Foundation</h3>
+          <p>Craft a research question, run a literature review, and choose your field and methodology.</p>
+          <span class="flow-tag">Question &amp; outline</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="card-label">Winter Term</span>
+          <h3>Research</h3>
+          <p>Execute your methodology, collect and analyze data, and refine through structured peer review.</p>
+          <span class="flow-tag">Methodology &amp; data</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <span class="card-label">Spring Term</span>
+          <h3>Publication</h3>
+          <p>Draft the final paper, complete board review, submit to the journal, and present at the symposium.</p>
+          <span class="flow-tag">Draft &amp; publish</span>
+        </div>
+      </div>
+      <div class="flow-cta">
+        <a href="curriculum.html" class="btn-outline">View the Curriculum</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBER SPOTLIGHT -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="spotlight reveal">
+        <div class="spotlight-img">
+          <img src="img-crispr-presentation.webp" alt="Papers members presenting CRISPR research at the symposium" />
+        </div>
+        <div class="spotlight-body">
+          <span class="eyebrow">Member Spotlight</span>
+          <p class="spotlight-quote">"####"</p>
+          <p class="spotlight-name">Ryan Baek, Charlize Sow &amp; Ethan Xu</p>
+          <p class="spotlight-role">A Comparative Review of CRISPR-Cas9 Based Therapeutic Strategies for Ankylosing Spondylitis · Biology &amp; Life Sciences</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY / TESTIMONIALS -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="hp-head">
+        <span class="eyebrow">The Community</span>
+        <h2>Join a community of student researchers.</h2>
+        <p>Papers members work across disciplines and chapters — sharing feedback, methods, and encouragement at every stage of the research process.</p>
+      </div>
+      <div class="tgrid">
+        <div class="tcard reveal">
+          <p class="tcard-quote">"####"</p>
+          <div class="tcard-foot">
+            <span class="tcard-avatar">CL</span>
+            <span><span class="tcard-name">Colin Lee</span><br /><span class="tcard-meta">Medicine &amp; Health</span></span>
+          </div>
+        </div>
+        <div class="tcard reveal">
+          <p class="tcard-quote">"####"</p>
+          <div class="tcard-foot">
+            <span class="tcard-avatar alt">AH</span>
+            <span><span class="tcard-name">Aglaia Hong</span><br /><span class="tcard-meta">Social Sciences</span></span>
+          </div>
+        </div>
+        <div class="tcard reveal">
+          <p class="tcard-quote">"####"</p>
+          <div class="tcard-foot">
+            <span class="tcard-avatar alt2">NJ</span>
+            <span><span class="tcard-name">Nicholas Jung</span><br /><span class="tcard-meta">Computer Science</span></span>
+          </div>
+        </div>
+        <div class="tcard reveal">
+          <p class="tcard-quote">"####"</p>
+          <div class="tcard-foot">
+            <span class="tcard-avatar">AP</span>
+            <span><span class="tcard-name">Andrew Park</span><br /><span class="tcard-meta">Economics</span></span>
+          </div>
+        </div>
+        <div class="tcard reveal">
+          <p class="tcard-quote">"####"</p>
+          <div class="tcard-foot">
+            <span class="tcard-avatar alt">MY</span>
+            <span><span class="tcard-name">Maddie Yang</span><br /><span class="tcard-meta">Medicine &amp; Health</span></span>
+          </div>
+        </div>
+        <div class="tcard reveal">
+          <p class="tcard-quote">"####"</p>
+          <div class="tcard-foot">
+            <span class="tcard-avatar alt2">SA</span>
+            <span><span class="tcard-name">Serra Akyali</span><br /><span class="tcard-meta">Humanities</span></span>
+          </div>
+        </div>
+        <div class="tcard reveal">
+          <p class="tcard-quote">"####"</p>
+          <div class="tcard-foot">
+            <span class="tcard-avatar">SC</span>
+            <span><span class="tcard-name">Soohan Cho</span><br /><span class="tcard-meta">Computer Science</span></span>
+          </div>
+        </div>
+        <div class="tcard reveal">
+          <p class="tcard-quote">"####"</p>
+          <div class="tcard-foot">
+            <span class="tcard-avatar alt">CH</span>
+            <span><span class="tcard-name">Carys Harvin</span><br /><span class="tcard-meta">Biology &amp; Life Sciences</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS BY DISCIPLINE -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="hp-head">
+        <span class="eyebrow">This Cohort's Research</span>
+        <h2>Explore member research.</h2>
+        <p>A selection of original projects from the current cohort, grouped by field. The full archive lives in the journal.</p>
+      </div>
+
+      <div class="disc-group">
+        <div class="disc-head"><h3>Biology &amp; Life Sciences</h3><span class="disc-count">7 papers</span></div>
+        <div class="proj-grid">
+          <div class="proj-card"><p class="paper-meta">Ryan Baek, Charlize Sow, Ethan Xu</p><span class="proj-title">A Comparative Review of CRISPR-Cas9 Based Therapeutic Strategies for Ankylosing Spondylitis</span></div>
+          <div class="proj-card"><p class="paper-meta">Barrett Kim, Dillon Chugani</p><span class="proj-title">Aspartame and Its Effects on Embryonic Development</span></div>
+          <div class="proj-card"><p class="paper-meta">Andy Song</p><span class="proj-title">The Role of Astrocytes as Contributors to Epileptogenesis and Future Targets for Epilepsy Treatment</span></div>
+          <div class="proj-card"><p class="paper-meta">Shaivi Kancharla</p><span class="proj-title">The Effect of Mitochondrial Therapy on Senescent Cells</span></div>
+        </div>
+      </div>
+
+      <div class="disc-group">
+        <div class="disc-head"><h3>Medicine &amp; Health</h3><span class="disc-count">4 papers</span></div>
+        <div class="proj-grid">
+          <div class="proj-card"><p class="paper-meta">Colin Lee</p><span class="proj-title">A Systematic Review on the Use of Oxytocin and Oxytocin Receptor Antagonists to Treat Endometriosis</span></div>
+          <div class="proj-card"><p class="paper-meta">Michelle Kim, Johannah Huang</p><span class="proj-title">Receptor-Retaining Properties of Aripiprazole and Effectiveness in Reducing Agitation in Schizophrenic Patients</span></div>
+          <div class="proj-card"><p class="paper-meta">Gemmi Haripottawekul</p><span class="proj-title">Socioeconomic Status in Breast Cancer Screening Access and Late-Stage Diagnosis in Low-Income Thai Communities</span></div>
+          <div class="proj-card"><p class="paper-meta">Maddie Yang</p><span class="proj-title">Blood–Brain Barrier Development and Treatment Response in Pediatric Brain Tumors</span></div>
+        </div>
+      </div>
+
+      <div class="disc-group">
+        <div class="disc-head"><h3>Economics</h3><span class="disc-count">3 papers</span></div>
+        <div class="proj-grid">
+          <div class="proj-card"><p class="paper-meta">Niccolo Lee-Suk, Eric Myung, Edward Zhang, Daniel Matloff</p><span class="proj-title">Behavioral Economics and Consumer Decision-Making: Anchoring in E-Commerce Pricing Strategies</span></div>
+          <div class="proj-card"><p class="paper-meta">Felix Bret</p><span class="proj-title">The Creation of the Bank of England and Its Effect on Political, Economic, and Societal Development</span></div>
+          <div class="proj-card"><p class="paper-meta">Andrew Park</p><span class="proj-title">Medicaid Expansion's Impact on Hospital Finances in Kentucky and Texas: A Mixed-Methods Analysis</span></div>
+        </div>
+      </div>
+
+      <div class="disc-group">
+        <div class="disc-head"><h3>Social Sciences</h3><span class="disc-count">3 papers</span></div>
+        <div class="proj-grid">
+          <div class="proj-card"><p class="paper-meta">Aglaia Hong</p><span class="proj-title">Game Theory's Impact on Minorities</span></div>
+          <div class="proj-card"><p class="paper-meta">Mel Guedes, Nandini Sharma</p><span class="proj-title">Impulse Control and Digital Advertising: Snapchat, Roblox, and Adolescent Brain Development</span></div>
+          <div class="proj-card"><p class="paper-meta">Julien Requa, John Lew, Lucas Suradejvibul</p><span class="proj-title">Meritocracy and Socio-Economic Stratification in Selective Higher Education</span></div>
+        </div>
+      </div>
+
+      <div class="disc-group">
+        <div class="disc-head"><h3>Computer Science</h3><span class="disc-count">2 papers</span></div>
+        <div class="proj-grid">
+          <div class="proj-card"><p class="paper-meta">Nicholas Jung</p><span class="proj-title">DeepStain: Multi-Domain Immunofluorescence and Immunohistochemistry Staining via Image-to-Image Translation</span></div>
+          <div class="proj-card"><p class="paper-meta">Soohan Cho</p><span class="proj-title">Analyzing Energy Consumption, Efficiency, and Scalability in Classical and Quantum Machines</span></div>
+        </div>
+      </div>
+
+      <div class="disc-group">
+        <div class="disc-head"><h3>Other</h3><span class="disc-count">3 papers</span></div>
+        <div class="proj-grid">
+          <div class="proj-card"><p class="paper-meta">Claire Bancroft, Ian Kim</p><span class="proj-title">Providing Evidence Against the Fermi Paradox: The Kardashev Scale and Drake Equation</span></div>
+          <div class="proj-card"><p class="paper-meta">Anay Mehta-Manghani, Boson Bai</p><span class="proj-title">How Machine Politics Affected New York City Public Works Procurement, 1910–1918</span></div>
+          <div class="proj-card"><p class="paper-meta">Serra Akyali</p><span class="proj-title">Translation and Interpretation of Female Transformation in Ovid's Metamorphoses</span></div>
+        </div>
+      </div>
+
+      <div class="disc-cta"><a href="journal.html" class="btn-outline">View the Full Journal →</a></div>
+    </div>
+  </section>
+
+  <!-- PARTNERS / SUBMISSION VENUES -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="hp-head">
+        <span class="eyebrow">Where the Work Goes</span>
+        <h2>Publication venues our members pursue.</h2>
+        <p>Finished papers can enter the Papers journal and be submitted to external journals, competitions, and conferences.</p>
+      </div>
+      <div class="partner-row">
+        <span class="partner-chip">Regeneron Science Talent Search</span>
+        <span class="partner-chip">Regeneron ISEF</span>
+        <span class="partner-chip">Journal of Emerging Investigators</span>
+        <span class="partner-chip">The Concord Review</span>
+        <span class="partner-chip">National High School Journal of Science</span>
+        <span class="partner-chip">Columbia Junior Science Journal</span>
+        <span class="partner-chip">John Locke Essay Competition</span>
+        <span class="partner-chip">Davidson Fellows</span>
+        <span class="partner-chip">Journal of Student Research</span>
+        <span class="partner-chip">MIT THINK</span>
+        <span class="partner-chip">JSHS</span>
+        <span class="partner-chip">Breakthrough Junior Challenge</span>
+      </div>
+      <div class="disc-cta" style="margin-top:32px;"><a href="opportunities.html" class="btn-outline">Browse All Opportunities →</a></div>
+    </div>
+  </section>
+
+  <!-- BOARD / MENTORS -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="hp-head">
+        <span class="eyebrow">Guidance</span>
+        <h2>Mentorship at every stage.</h2>
+        <p>Members are supported by the Papers board and mentors who guide research design, peer review, and the path to publication.</p>
+      </div>
+      <div class="speaker-grid">
+        <div class="speaker-card"><div class="speaker-avatar">##</div><p class="speaker-name">####</p><p class="speaker-role">####</p><p class="speaker-bio">####</p></div>
+        <div class="speaker-card"><div class="speaker-avatar">##</div><p class="speaker-name">####</p><p class="speaker-role">####</p><p class="speaker-bio">####</p></div>
+        <div class="speaker-card"><div class="speaker-avatar">##</div><p class="speaker-name">####</p><p class="speaker-role">####</p><p class="speaker-bio">####</p></div>
+        <div class="speaker-card"><div class="speaker-avatar">##</div><p class="speaker-name">####</p><p class="speaker-role">####</p><p class="speaker-bio">####</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY STEPS -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="hp-head">
+        <span class="eyebrow">Getting Started</span>
+        <h2>Start your application.</h2>
+        <p>Joining takes about #### minutes. No prior research experience required — just curiosity and a willingness to commit to the process.</p>
+      </div>
+      <div class="apply-steps">
+        <div class="apply-step"><span class="card-num">01</span><h4>Join a chapter</h4><p>Join or found a Papers chapter at your school to access the network and curriculum.</p></div>
+        <div class="apply-step"><span class="card-num">02</span><h4>Submit the form</h4><p>Complete a short application telling us about your interests and what you'd like to research.</p></div>
+        <div class="apply-step"><span class="card-num">03</span><h4>Begin the curriculum</h4><p>Start the fall term — shaping your research question and reviewing existing literature.</p></div>
+        <div class="apply-step"><span class="card-num">04</span><h4>Publish &amp; present</h4><p>Submit to the journal and present your year-long research at the annual symposium.</p></div>
+      </div>
+      <div class="flow-cta" style="margin-top:32px;">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSctlZXgGbNG_R5aiHQYVtS1sK2Sh-Knr50_ApkQGfcB1JdCrA/viewform?usp=header" class="btn-apply">Apply Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="card">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false"><span>Who can join Papers?</span><span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>Papers is open to high school students who want to design and carry out an original, year-long research project in any field. No prior research experience is required. Members join through a chapter at their school.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false"><span>Do I need a topic before I apply?</span><span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>No. The fall term is built around helping you find and shape a research question. You only need a field or a few interests to start.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false"><span>How much time does it take?</span><span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>####</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false"><span>Is there a cost to participate?</span><span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>####</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false"><span>What happens to my research at the end?</span><span class="faq-icon">+</span></button>
+            <div class="faq-answer"><p>Publication-ready papers enter the Papers journal and are eligible for submission to external academic journals. Every member also presents their work at the annual Papers research symposium.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="cta-final">
+        <div class="cta-final-body">
+          <h2>Don't wait to start your research.</h2>
+          <p>Applications for the 2026 cohort are open. Take your first idea from a question to a published paper.</p>
+          <div class="benefit-grid">
+            <div class="benefit"><div class="benefit-val">Any field</div><div class="benefit-lbl">Open topics</div></div>
+            <div class="benefit"><div class="benefit-val">Peer review</div><div class="benefit-lbl">Every stage</div></div>
+            <div class="benefit"><div class="benefit-val">Mentorship</div><div class="benefit-lbl">From the board</div></div>
+            <div class="benefit"><div class="benefit-val">Journal</div><div class="benefit-lbl">Get published</div></div>
+            <div class="benefit"><div class="benefit-val">Symposium</div><div class="benefit-lbl">Present your work</div></div>
+            <div class="benefit"><div class="benefit-val">####</div><div class="benefit-lbl">Cost</div></div>
+          </div>
+          <div class="ctas" style="margin-bottom:0;">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSctlZXgGbNG_R5aiHQYVtS1sK2Sh-Knr50_ApkQGfcB1JdCrA/viewform?usp=header" class="btn-apply">Apply Now</a>
+            <a href="mailto:contact.papersorg@gmail.com" class="btn-outline">Contact Us</a>
+          </div>
+        </div>
+        <div class="cta-final-img">
+          <img src="img-group-selfie.webp" alt="Papers members after the symposium" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="wave-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <a href="index.html" class="footer-logo">Papers</a>
+          <p class="footer-desc">A student research society at Phillips Academy Andover. We guide students from question to publication.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/papers_andover" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+              <span class="footer-social-tip">Instagram</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://linkedin.com" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <span class="footer-social-tip">LinkedIn</span>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="mailto:contact.papersorg@gmail.com" class="footer-social-link" aria-label="Email">
+              <span class="footer-social-tip">Email</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navigate</h4>
+            <a href="index.html">Home</a>
+            <a href="journal.html">Journal</a>
+            <a href="curriculum.html">Curriculum</a>
+            <a href="opportunities.html">Opportunities</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="mailto:contact.papersorg@gmail.com">contact.papersorg@gmail.com</a>
+            <button class="btn-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Papers · Phillips Academy Andover</span>
+        <span>© <span id="yr"></span> Papers Research Society</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Mobile nav
+    (function () {
+      var btn = document.getElementById('nav-hamburger');
+      var links = document.getElementById('nav-links');
+      if (!btn || !links) return;
+      btn.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          setTimeout(function () {
+            links.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-label', 'Open menu');
+          }, 0);
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (!btn.contains(e.target) && !links.contains(e.target)) {
+          links.classList.remove('open');
+          btn.classList.remove('open');
+        }
+      });
+    })();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+      });
+    });
+
+    // Scroll reveal
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e, i) {
+          if (e.isIntersecting) {
+            e.target.style.transitionDelay = (i % 4 * 60) + 'ms';
+            e.target.classList.add('in');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { obs.observe(el); });
+    })();
+
+    // Count-up stat
+    (function () {
+      var el = document.querySelector('[data-count]');
+      if (!el) return;
+      var target = +el.getAttribute('data-count');
+      var done = false;
+      var obs = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting && !done) {
+          done = true;
+          var start = 0, dur = 1100, t0 = performance.now();
+          (function tick(now) {
+            var p = Math.min((now - t0) / dur, 1);
+            el.textContent = Math.round(start + (target - start) * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(tick);
+          })(t0);
+        }
+      }, { threshold: 0.5 });
+      obs.observe(el);
+    })();
+
+    // Canvas grid background — mouse trail
+    (function () {
+      var canvas = document.getElementById('bg-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var CELL = 20;
+      var cells = new Map();
+      var COLORS = ['#4A90D9', '#D64545', '#1a3a5c'];
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      window.addEventListener('mousemove', function (e) {
+        var px = Math.floor((e.clientX + window.scrollX) / CELL);
+        var py = Math.floor((e.clientY + window.scrollY) / CELL);
+        var key = px + ',' + py;
+        if (!cells.has(key) && cells.size < 600) {
+          cells.set(key, { color: COLORS[Math.floor(Math.random() * COLORS.length)], alpha: 0.28 });
+        }
+      });
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var sx = window.scrollX, sy = window.scrollY;
+        cells.forEach(function (cell, key) {
+          cell.alpha *= 0.988;
+          if (cell.alpha < 0.005) { cells.delete(key); return; }
+          var p = key.split(','), vx = +p[0] * CELL - sx, vy = +p[1] * CELL - sy;
+          if (vx + CELL < 0 || vx > canvas.width || vy + CELL < 0 || vy > canvas.height) return;
+          ctx.globalAlpha = cell.alpha; ctx.fillStyle = cell.color;
+          ctx.fillRect(vx + 0.5, vy + 0.5, CELL - 1, CELL - 1);
+        });
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+      resize(); window.addEventListener('resize', resize); draw();
+    })();
+  </script>
+</body>
+</html>
