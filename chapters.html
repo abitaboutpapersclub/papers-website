@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&amp;display=swap">
+  <style>
+    :root {
+      --violet: #1f3a63; --violet-dark: #16294a; --violet-text: #9db8dd;
+      --ink: #17112b; --gray: #5b5766; --gray-light: #8a8595; --line: #e7e5ee;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; color: var(--ink); background: #fff; background-image: linear-gradient(rgba(31,58,99,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(31,58,99,0.1) 1px, transparent 1px); background-size: 56px 56px; font-size: 16px; line-height: 1.7; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 40px; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--violet); display: block; margin-bottom: 14px; }
+    h2.sec { font-size: clamp(28px, 3.4vw, 40px); font-weight: 500; line-height: 1.25; }
+    .sec-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+    .sec-head p { font-size: 16px; color: var(--gray); margin-top: 12px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--violet); color: #fff; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 500; padding: 12px 26px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.15s; }
+    .btn:hover { background: var(--violet-dark); }
+    header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; gap: 30px; height: 68px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 21px; margin-right: auto; }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--gray); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--violet); font-weight: 600; }
+    .nav-links .btn { padding: 9px 20px; font-size: 13px; color: #fff; }
+    .nav-join { position: relative; }
+    .nav-join > .btn { cursor: pointer; }
+    .nav-join-menu { display: none; position: absolute; right: 0; top: 100%; padding-top: 8px; z-index: 300; }
+    .nav-join:hover .nav-join-menu { display: block; }
+    .nav-join-menu > div { background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 10px 30px rgba(23,17,43,0.14); padding: 6px; min-width: 230px; display: flex; flex-direction: column; }
+    .nav-join-menu a { display: block; font-size: 13.5px; font-weight: 500; color: var(--ink); padding: 10px 14px; border-radius: 6px; }
+    .nav-join-menu a:hover { background: #E8F0FF; color: var(--violet); }
+    @media (max-width: 800px) { .nav-links a:not(.btn) { display: none; } }
+
+    .masthead { background: #1f3a63; color: #fff; padding: 72px 0 60px; text-align: center; }
+    .masthead .mast-sub { margin-left: auto; margin-right: auto; }
+    .masthead h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px, 5vw, 58px); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    .mast-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--violet-text); display: block; margin-bottom: 14px; }
+    .mast-sub { font-size: 15.5px; color: rgba(255,255,255,0.85); max-width: 640px; line-height: 1.8; margin-bottom: 30px; }
+    .mast-search .btn { background: #4a72b8; border: 2px solid rgba(255,255,255,0.25); }
+    .mast-search .btn:hover { background: #3d63a3; }
+
+    /* WHAT */
+    .what-band { padding: 88px 0 40px; }
+    .what-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 860px) { .what-grid { grid-template-columns: 1fr; } }
+    .what { border: 2.5px solid #111; border-radius: 8px; padding: 30px 26px; background: #fff; }
+    .what-2 { background: #6b9fd9; color: #fff; }
+    .what-3 { background: #1f3a63; color: #fff; }
+    .what-num { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-bottom: 10px; }
+    .what h3 { font-size: 21px; font-weight: 600; line-height: 1.35; margin-bottom: 10px; }
+    .what p { font-size: 14px; line-height: 1.7; opacity: 0.92; }
+
+    /* PERKS */
+    .perk-band { padding: 88px 0 96px; }
+    .perk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 900px; margin: 0 auto; }
+    @media (max-width: 720px) { .perk-grid { grid-template-columns: 1fr; } }
+    .perk { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 26px 28px; }
+    .perk h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--violet-dark); }
+    .perk p { font-size: 13.5px; color: var(--gray); line-height: 1.75; }
+
+    /* PATHS */
+    .path-band { background: #E8F0FF; padding: 96px 0; }
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 940px; margin: 0 auto; }
+    @media (max-width: 780px) { .paths { grid-template-columns: 1fr; } }
+    .path { background: #fff; border: 2.5px solid #111; border-radius: 10px; padding: 34px 32px; display: flex; flex-direction: column; }
+    .path h3 { font-family: 'Playfair Display', serif; font-size: 23px; font-weight: 700; margin-bottom: 12px; }
+    .path p { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 18px; flex: 1; }
+    .path .tagline { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--violet); display: block; margin-bottom: 10px; }
+
+    /* SCHOOL DIRECTORY */
+    .dir-band { padding: 96px 0; }
+    .dir-stats { display: flex; justify-content: center; gap: 0; margin-bottom: 40px; flex-wrap: wrap; }
+    .dir-stat { text-align: center; padding: 0 48px; border-right: 1px solid var(--line); }
+    .dir-stat:last-child { border-right: none; }
+    .dir-stat .num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; line-height: 1; color: var(--violet); }
+    .dir-stat .lbl { font-size: 11.5px; color: var(--gray-light); margin-top: 7px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .dir-acc { max-width: 860px; margin: 0 auto; border-top: 1px solid var(--line); }
+    .dir-item { border-bottom: 1px solid var(--line); }
+    .dir-btn { display: flex; align-items: center; gap: 14px; width: 100%; background: none; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; color: var(--ink); padding: 20px 8px; text-align: left; }
+    .dir-btn .dir-meta { margin-left: auto; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-light); }
+    .dir-btn .dir-chev { font-size: 18px; color: var(--violet); transition: transform 0.2s ease; }
+    .dir-item.open .dir-chev { transform: rotate(90deg); }
+    .dir-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .dir-item.open .dir-body { max-height: 400px; }
+    .dir-grid { display: grid; grid-template-columns: 280px 1fr; gap: 28px; padding: 4px 8px 28px; align-items: start; }
+    @media (max-width: 700px) { .dir-grid { grid-template-columns: 1fr; } }
+    .dir-grid h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-light); margin-bottom: 8px; }
+    .dir-proj { font-size: 14px; color: var(--gray); line-height: 1.8; }
+
+    /* CONTACT */
+    .contact-band { padding: 96px 0; }
+    .contact-card { max-width: 620px; margin: 0 auto; background: #fff; border: 2.5px solid #111; border-radius: 10px; padding: 38px 40px; }
+    .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 25px; font-weight: 700; margin-bottom: 6px; }
+    .contact-card > p { font-size: 14px; color: var(--gray); margin-bottom: 24px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-light); margin-bottom: 6px; }
+    .field input, .field textarea { width: 100%; font-family: 'Poppins', sans-serif; font-size: 14.5px; padding: 12px 14px; border: 1px solid #cfcade; border-radius: 6px; color: var(--ink); resize: vertical; }
+    .field input:focus, .field textarea:focus { outline: 2px solid var(--violet); outline-offset: -1px; border-color: var(--violet); }
+    .contact-note { font-size: 11.5px; color: var(--gray-light); margin-top: 12px; }
+
+    footer { background: #1f3a63; color: rgba(255,255,255,0.65); padding: 64px 0 40px; }
+    .foot { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+    .foot-logo { font-weight: 700; font-size: 18px; color: #fff; display: block; margin-bottom: 12px; }
+    .foot-desc { font-size: 13.5px; line-height: 1.8; max-width: 300px; color: rgba(255,255,255,0.7); }
+    .foot-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+    .foot-col h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
+    .foot-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 9px; transition: color 0.15s; }
+    .foot-col a:hover { color: #fff; }
+    .foot-bottom { margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; color: rgba(255,255,255,0.3); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  </style>
+</helmet>
+
+<header data-screen-label="Nav">
+  <div class="wrap">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">{{ brand }}</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="journal.html">Journal</a>
+        <a href="chapters.html" class="active">Chapters</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="summer.html">Summer</a>
+        <div class="nav-join">
+          <span class="btn">Join Now <span style="font-size: 9px; margin-left: 2px">▼</span></span>
+          <div class="nav-join-menu"><div>
+            <a href="chapters.html#reach-out">Apply for a Chapter</a>
+            <a href="summer.html#apply">Apply for Summer Program</a>
+          </div></div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead" data-screen-label="Chapters Masthead">
+  <div class="wrap">
+    <span class="mast-eyebrow">{{ brand }} Chapters</span>
+    <h1>Bring research to your school.</h1>
+    <p class="mast-sub">A {{ brand }} Chapter is a student-run research club at your high school — with a ready-made curriculum, shared guest speakers, peer editing across the network, and a path to publishing in the {{ brand }} Journal. No research course at your school? That's exactly why we exist.</p>
+    <span class="mast-search"><a href="#reach-out" class="btn">Reach out to start a chapter →</a></span>
+  </div>
+</section>
+
+<section class="perk-band" data-screen-label="What You Get">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What your chapter gets</span>
+      <h2 class="sec">You're not starting from scratch</h2>
+    </div>
+    <div class="perk-grid">
+      <div class="perk">
+        <h4>A finalized curriculum</h4>
+        <p>Meeting-by-meeting slide decks, worksheets, and resources — objectives set for each period so leaders can focus on running the club, not inventing it.</p>
+      </div>
+      <div class="perk">
+        <h4>Shared guest speakers</h4>
+        <p>Chapters across the network share access to guest speakers — researchers, professors, and college students — scheduled through the year.</p>
+      </div>
+      <div class="perk">
+        <h4>Peer editing across schools</h4>
+        <p>Your members swap drafts with students at other chapters for feedback beyond your own club room.</p>
+      </div>
+      <div class="perk">
+        <h4>A path to publication</h4>
+        <p>Finished papers are eligible for the {{ brand }} Journal, plus guidance on competitions and journals organized by deadline and topic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="path-band" data-screen-label="Two Paths">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Two ways in</span>
+      <h2 class="sec">New club or existing club — both work</h2>
+    </div>
+    <div class="paths">
+      <div class="path">
+        <span class="tagline">Start fresh</span>
+        <h3>Found a new chapter</h3>
+        <p>No research club at your school yet? We'll help you launch one: the full curriculum, resources, and a mentor contact to get your first meetings running. Especially great for schools without a research course.</p>
+        <a href="#reach-out" class="btn">Start a chapter →</a>
+      </div>
+      <div class="path">
+        <span class="tagline">Have questions?</span>
+        <h3>Inquire more about chapters</h3>
+        <p>Not sure where to start, or already have a club and want to plug into the network? Reach out and we'll figure out the right fit for your school together.</p>
+        <a href="#reach-out" class="btn">Inquire →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dir-band" data-screen-label="Our Chapters">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Our chapters</span>
+      <h2 class="sec">Schools in the network</h2>
+      <p>Each chapter gets its own page with photos and projects — coming as schools are finalized.</p>
+    </div>
+    <div class="dir-stats">
+      <div class="dir-stat"><div class="num">##</div><div class="lbl">Chapter schools</div></div>
+      <div class="dir-stat"><div class="num">###</div><div class="lbl">Student researchers</div></div>
+      <div class="dir-stat"><div class="num">##</div><div class="lbl">States</div></div>
+    </div>
+    <div class="dir-acc">
+      <sc-for list="{{ schools }}" as="s" hint-placeholder-count="3">
+        <div class="dir-item {{ s.openClass }}">
+          <button class="dir-btn" onClick="{{ s.toggle }}"><span>{{ s.name }}</span><span class="dir-meta">{{ s.meta }}</span><span class="dir-chev">›</span></button>
+          <div class="dir-body">
+            <div class="dir-grid">
+              <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ s.photoId }}" shape="rounded" radius="8" placeholder="Drop a chapter photo" style="width: 100%; height: 180px" hint-size="100%,180px"></x-import>
+              <div>
+                <h4>Current projects</h4>
+                <p class="dir-proj">{{ s.projects }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section class="contact-band" id="reach-out" data-screen-label="Reach Out">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Reach out</span>
+      <h2 class="sec">Tell us about your school</h2>
+      <p>Fill this out and it opens an email to our chapters team — we usually reply within a few days.</p>
+    </div>
+    <div class="contact-card">
+      <h3>Chapter interest form</h3>
+      <p>All fields help us route you to the right person.</p>
+      <div class="field">
+        <label>Your name</label>
+        <input type="text" placeholder="Jane Doe" value="{{ fName }}" onChange="{{ setName }}">
+      </div>
+      <div class="field">
+        <label>School &amp; class year</label>
+        <input type="text" placeholder="e.g. Northside High, class of '28" value="{{ fSchool }}" onChange="{{ setSchool }}">
+      </div>
+      <div class="field">
+        <label>New chapter or existing club?</label>
+        <input type="text" placeholder="e.g. starting new / we have a research club already" value="{{ fType }}" onChange="{{ setType }}">
+      </div>
+      <div class="field">
+        <label>Anything else</label>
+        <textarea rows="4" placeholder="Tell us about your school and what you're hoping to build…" value="{{ fMsg }}" onChange="{{ setMsg }}"></textarea>
+      </div>
+      <button class="btn" onClick="{{ sendEmail }}">Open email to send →</button>
+      <p class="contact-note">This opens your email app with everything pre-filled — just hit send.</p>
+    </div>
+  </div>
+</section>
+
+<footer data-screen-label="Footer">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <span class="foot-logo">{{ brand }}</span>
+        <p class="foot-desc">We empower bright young people to start impactful research.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Program</h4>
+          <a href="summer.html">Summer Program</a>
+          <a href="chapters.html">Chapters</a>
+          <a href="summer.html#apply">Application</a>
+        </div>
+        <div class="foot-col">
+          <h4>Journal</h4>
+          <a href="journal.html">Browse papers</a>
+          <a href="summer.html#apply">Submit</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© {{ year }} {{ brand }}. All rights reserved.</span>
+      <span></span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PAPERS&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;chaptersEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;chapters@papersprogram.org&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;$preview&quot;:{&quot;width&quot;:1140,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { name: '', school: '', type: '', msg: '', openSchool: -1 };
+
+  componentDidMount() {
+    document.title = (this.props.brandName ?? 'PAPERS') + ' — Chapters';
+  }
+
+  renderVals() {
+    const brand = this.props.brandName ?? 'PAPERS';
+    const to = this.props.chaptersEmail ?? 'chapters@papersprogram.org';
+    return {
+      brand,
+      year: new Date().getFullYear(),
+      schools: [
+        { name: 'School name — coming soon', meta: 'Founding chapter' },
+        { name: 'School name — coming soon', meta: 'Chapter' },
+        { name: 'Your school here?', meta: 'Reach out below' },
+      ].map((s, i) => ({
+        ...s,
+        projects: 'Project titles and photos will appear here once the chapter\u2019s first cohort is underway.',
+        photoId: 'chapter-school-' + (i + 1),
+        openClass: this.state.openSchool === i ? 'open' : '',
+        toggle: () => this.setState({ openSchool: this.state.openSchool === i ? -1 : i }),
+      })),
+      fName: this.state.name, setName: (e) => this.setState({ name: e.target.value }),
+      fSchool: this.state.school, setSchool: (e) => this.setState({ school: e.target.value }),
+      fType: this.state.type, setType: (e) => this.setState({ type: e.target.value }),
+      fMsg: this.state.msg, setMsg: (e) => this.setState({ msg: e.target.value }),
+      sendEmail: () => {
+        const s = this.state;
+        const subject = `Chapter interest — ${s.school || 'my school'}`;
+        const body = `Hi ${brand} team,%0D%0A%0D%0AName: ${encodeURIComponent(s.name)}%0D%0ASchool: ${encodeURIComponent(s.school)}%0D%0ANew chapter or existing club: ${encodeURIComponent(s.type)}%0D%0A%0D%0A${encodeURIComponent(s.msg)}`;
+        window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

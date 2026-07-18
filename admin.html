@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&amp;display=swap">
+  <style>
+    :root {
+      --violet: #1f3a63; --violet-dark: #16294a; --violet-text: #9db8dd;
+      --ink: #17112b; --gray: #5b5766; --gray-light: #8a8595; --line: #e7e5ee;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    body { font-family: 'Poppins', sans-serif; color: var(--ink); background: #f7f8fb; font-size: 16px; line-height: 1.7; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 40px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--violet); color: #fff; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.15s; }
+    .btn:hover { background: var(--violet-dark); }
+    .btn-ghost { background: #fff; color: var(--violet); border: 1px solid #cfcade; }
+    .btn-ghost:hover { background: #f2f6fc; }
+    .btn-danger { background: #fff; color: #b42318; border: 1px solid #f0c8c4; }
+    .btn-danger:hover { background: #fdf2f1; }
+    header { background: #fff; border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; gap: 30px; height: 68px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 21px; margin-right: auto; }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--gray); }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--violet); font-weight: 600; }
+
+    .gate { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 60px 20px; }
+    .gate-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 42px 44px; max-width: 400px; width: 100%; text-align: center; }
+    .gate-card h1 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .gate-card > p { font-size: 13.5px; color: var(--gray); margin-bottom: 24px; }
+    .gate-err { font-size: 12.5px; color: #b42318; margin-top: 12px; }
+
+    .admin-band { padding: 48px 0 96px; }
+    .admin-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .admin-head h1 { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; margin-right: auto; }
+    .admin-sub { font-size: 13.5px; color: var(--gray); margin-bottom: 28px; }
+    .notice { font-size: 13px; color: #067647; background: #ecfdf3; border: 1px solid #abe8c5; border-radius: 6px; padding: 9px 14px; margin-bottom: 18px; }
+    .notice.err { color: #b42318; background: #fdf2f1; border-color: #f0c8c4; }
+
+    .form-card { background: #fff; border: 2px solid var(--violet); border-radius: 12px; padding: 30px 32px; margin-bottom: 28px; }
+    .form-card h2 { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; margin-bottom: 18px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+    @media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } }
+    .field { display: flex; flex-direction: column; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-light); margin-bottom: 5px; }
+    .field input, .field textarea, .field select { font-family: 'Poppins', sans-serif; font-size: 14px; padding: 10px 12px; border: 1px solid #cfcade; border-radius: 6px; color: var(--ink); background: #fff; resize: vertical; }
+    .field input:focus, .field textarea:focus, .field select:focus { outline: 2px solid var(--violet); outline-offset: -1px; }
+    .pdf-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .pdf-current { font-size: 12.5px; color: #067647; background: #ecfdf3; border-radius: 5px; padding: 4px 10px; }
+    .pdf-remove { background: none; border: none; font-size: 12px; color: #b42318; cursor: pointer; text-decoration: underline; }
+    .form-actions { display: flex; gap: 12px; margin-top: 22px; }
+
+    .row-list { display: flex; flex-direction: column; gap: 10px; }
+    .row { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 16px 20px; }
+    .row-main { flex: 1; min-width: 0; }
+    .row-title { font-size: 15px; font-weight: 600; line-height: 1.4; }
+    .row-meta { font-size: 12px; color: var(--gray-light); margin-top: 2px; }
+    .row-pdf { font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px; padding: 3px 8px; white-space: nowrap; }
+    .row-pdf.yes { color: #067647; background: #ecfdf3; }
+    .row-pdf.no { color: var(--gray-light); background: #f1f0f5; }
+    .row-actions { display: flex; gap: 8px; }
+    .row-actions button { font-family: 'Poppins', sans-serif; font-size: 12.5px; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
+    @media (max-width: 640px) { .row { flex-wrap: wrap; } }
+  </style>
+</helmet>
+
+<header data-screen-label="Nav">
+  <div class="wrap">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">{{ brand }}</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="journal.html">Journal</a>
+        <a href="chapters.html">Chapters</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="summer.html">Summer</a>
+        <a href="admin.html" class="active">Admin</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+  <div class="gate" data-screen-label="Password Gate">
+    <div class="gate-card">
+      <h1>Journal admin</h1>
+      <p>Enter the admin password to manage published papers.</p>
+      <div class="field">
+        <input type="password" placeholder="Password" value="{{ pw }}" onChange="{{ setPw }}" onKeyDown="{{ pwKey }}">
+      </div>
+      <div style="margin-top: 16px;"><button class="btn" onClick="{{ unlock }}">Unlock →</button></div>
+      <sc-if value="{{ pwErr }}" hint-placeholder-val="{{ false }}">
+        <p class="gate-err">Incorrect password — try again.</p>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ unlocked }}" hint-placeholder-val="{{ false }}">
+  <section class="admin-band" data-screen-label="Admin">
+    <div class="wrap">
+      <div class="admin-head">
+        <h1>Journal admin</h1>
+        <button class="btn" onClick="{{ addNew }}">+ Add paper</button>
+        <button class="btn btn-ghost" onClick="{{ resetDefaults }}">Reset to defaults</button>
+        <button class="btn btn-ghost" onClick="{{ logout }}">Log out</button>
+      </div>
+      <p class="admin-sub">{{ paperCount }} papers in the journal. {{ backendNote }}</p>
+      <sc-if value="{{ hasNotice }}" hint-placeholder-val="{{ false }}">
+        <p class="notice {{ noticeClass }}">{{ notice }}</p>
+      </sc-if>
+
+      <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ false }}">
+        <div class="form-card">
+          <h2>{{ formTitle }}</h2>
+          <div class="form-grid">
+            <div class="field full">
+              <label>Title</label>
+              <input type="text" placeholder="Paper title" value="{{ fTitle }}" onChange="{{ setTitle }}">
+            </div>
+            <div class="field">
+              <label>Author</label>
+              <input type="text" placeholder="e.g. Jane Doe" value="{{ fAuthor }}" onChange="{{ setAuthor }}">
+            </div>
+            <div class="field">
+              <label>Discipline</label>
+              <select value="{{ fDisc }}" onChange="{{ setDisc }}">
+                <option value="Mathematics">Mathematics</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Physics">Physics</option>
+                <option value="Biology">Biology</option>
+                <option value="Social Science">Social Science</option>
+                <option value="Philosophy">Philosophy</option>
+                <option value="Policy">Policy</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Specific topic</label>
+              <input type="text" placeholder="e.g. Artificial Intelligence" value="{{ fTag }}" onChange="{{ setTag }}">
+            </div>
+            <div class="field">
+              <label>Issue</label>
+              <select value="{{ fIssue }}" onChange="{{ setIssue }}">
+                <option value="Vol. 2 · Spring 2026">Vol. 2 · Spring 2026</option>
+                <option value="Vol. 1 · Fall 2025">Vol. 1 · Fall 2025</option>
+                <option value="Vol. 1 · Spring 2025">Vol. 1 · Spring 2025</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Date</label>
+              <input type="text" placeholder="e.g. May 2026" value="{{ fDate }}" onChange="{{ setDate }}">
+            </div>
+            <div class="field">
+              <label>Page numbers</label>
+              <input type="text" placeholder="e.g. pp. 1–18" value="{{ fPages }}" onChange="{{ setPages }}">
+            </div>
+            <div class="field full">
+              <label>Abstract</label>
+              <textarea rows="3" placeholder="One or two sentences summarizing the paper…" value="{{ fAbstract }}" onChange="{{ setAbstract }}"></textarea>
+            </div>
+            <div class="field full">
+              <label>Paper PDF</label>
+              <div class="pdf-row">
+                <input type="file" accept="application/pdf" onChange="{{ onPdf }}">
+                <sc-if value="{{ fHasPdf }}" hint-placeholder-val="{{ false }}">
+                  <span class="pdf-current">✓ {{ fPdfName }}</span>
+                  <button class="pdf-remove" onClick="{{ removePdf }}">remove</button>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" onClick="{{ save }}">{{ saveLabel }}</button>
+            <button class="btn btn-ghost" onClick="{{ cancel }}">Cancel</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <div class="row-list">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
+          <div class="row">
+            <div class="row-main">
+              <div class="row-title">{{ r.title }}</div>
+              <div class="row-meta">{{ r.meta }}</div>
+            </div>
+            <span class="row-pdf {{ r.pdfClass }}">{{ r.pdfLabel }}</span>
+            <div class="row-actions">
+              <button class="btn-ghost" onClick="{{ r.edit }}">Edit</button>
+              <button class="btn-danger" onClick="{{ r.del }}">Delete</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PAPERS&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;$preview&quot;:{&quot;width&quot;:1000,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = {
+    authed: false, pw: '', pwErr: false,
+    papers: null, loading: true, saving: false, editing: null, notice: '', noticeErr: false,
+    form: this.blankForm(),
+  };
+
+  blankForm() {
+    return { title: '', author: '', discipline: 'Mathematics', tag: '', issue: 'Vol. 2 \u00b7 Spring 2026', date: '', pages: '', abstract: '', pdf: null, pdfName: '', pdfFile: null };
+  }
+
+  componentDidMount() {
+    document.title = (this.props.brandName ?? 'PAPERS') + ' \u2014 Admin';
+    this.setState({ authed: sessionStorage.getItem('papers_admin_auth') === '1' });
+    import('./journal-data.js').then(m => { this.mod = m; this.refresh(); });
+  }
+
+  refresh() {
+    if (!this.mod) return;
+    this.setState({ loading: true });
+    this.mod.fetchPapers()
+      .then(papers => this.setState({ papers, loading: false }))
+      .catch(e => this.setState({ loading: false, notice: 'Could not load papers: ' + (e.message || e), noticeErr: true }));
+  }
+
+  setField(k) { return (e) => this.setState({ form: { ...this.state.form, [k]: e.target.value } }); }
+
+  doSave() {
+    const f = this.state.form;
+    if (!f.title.trim() || !f.author.trim()) { this.setState({ notice: 'Title and author are required.', noticeErr: true }); return; }
+    this.setState({ saving: true, notice: '' });
+    const run = async () => {
+      let pdf = f.pdf, pdfName = f.pdfName;
+      if (f.pdfFile) { const up = await this.mod.uploadPdf(f.pdfFile); pdf = up.url; pdfName = up.name; }
+      const payload = { title: f.title, author: f.author, discipline: f.discipline, tag: f.tag, issue: f.issue, date: f.date, pages: f.pages, abstract: f.abstract, pdf, pdfName };
+      const isNew = this.state.editing === 'new';
+      if (isNew) await this.mod.addPaper(payload); else await this.mod.updatePaper(this.state.editing, payload);
+      this.setState({ saving: false, editing: null, notice: isNew ? 'Paper added \u2014 live for everyone now.' : 'Paper updated.', noticeErr: false });
+      this.refresh();
+    };
+    run().catch(e => this.setState({ saving: false, notice: 'Save failed: ' + (e.message || e), noticeErr: true }));
+  }
+
+  doDelete(id, title) {
+    if (!confirm('Delete "' + title + '" from the journal?')) return;
+    this.mod.deletePaper(id)
+      .then(() => { this.setState({ notice: 'Paper deleted.', noticeErr: false }); this.refresh(); })
+      .catch(e => this.setState({ notice: 'Delete failed: ' + (e.message || e), noticeErr: true }));
+  }
+
+  doReset() {
+    if (!confirm('Reset the journal to the original 22 papers? This replaces everything currently in the journal.')) return;
+    this.setState({ saving: true, notice: '' });
+    this.mod.resetToDefaults()
+      .then(() => { this.setState({ saving: false, notice: 'Journal reset to defaults.', noticeErr: false }); this.refresh(); })
+      .catch(e => this.setState({ saving: false, notice: 'Reset failed: ' + (e.message || e), noticeErr: true }));
+  }
+
+  renderVals() {
+    const brand = this.props.brandName ?? 'PAPERS';
+    const papers = this.state.papers || [];
+    const f = this.state.form;
+    const backendNote = this.mod
+      ? (this.mod.isBackendConfigured
+          ? 'Connected to your shared database \u2014 changes are live for everyone on the Journal tab and homepage.'
+          : 'No backend connected yet: changes save to this browser only. Add your Supabase keys in supabase-config.js to sync for everyone.')
+      : 'Loading\u2026';
+    return {
+      brand,
+      locked: !this.state.authed,
+      unlocked: this.state.authed,
+      pw: this.state.pw,
+      setPw: (e) => this.setState({ pw: e.target.value, pwErr: false }),
+      pwKey: (e) => { if (e.key === 'Enter') this.tryUnlock(); },
+      unlock: () => this.tryUnlock(),
+      pwErr: this.state.pwErr,
+      logout: () => { sessionStorage.removeItem('papers_admin_auth'); this.setState({ authed: false, pw: '' }); },
+      paperCount: papers.length,
+      backendNote,
+      hasNotice: !!this.state.notice,
+      notice: this.state.notice,
+      noticeClass: this.state.noticeErr ? 'err' : '',
+      addNew: () => this.setState({ editing: 'new', form: this.blankForm(), notice: '' }),
+      resetDefaults: () => this.doReset(),
+      formOpen: !!this.state.editing,
+      formTitle: this.state.editing === 'new' ? 'Add a paper' : 'Edit paper',
+      fTitle: f.title, setTitle: this.setField('title'),
+      fAuthor: f.author, setAuthor: this.setField('author'),
+      fDisc: f.discipline, setDisc: this.setField('discipline'),
+      fTag: f.tag, setTag: this.setField('tag'),
+      fIssue: f.issue, setIssue: this.setField('issue'),
+      fDate: f.date, setDate: this.setField('date'),
+      fPages: f.pages, setPages: this.setField('pages'),
+      fAbstract: f.abstract, setAbstract: this.setField('abstract'),
+      fHasPdf: !!(f.pdf || f.pdfFile), fPdfName: f.pdfName || 'PDF attached',
+      onPdf: (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        this.setState({ form: { ...this.state.form, pdfFile: file, pdfName: file.name } });
+      },
+      removePdf: () => this.setState({ form: { ...this.state.form, pdf: null, pdfFile: null, pdfName: '' } }),
+      save: () => this.doSave(),
+      saveLabel: this.state.saving ? 'Saving\u2026' : 'Save paper',
+      cancel: () => this.setState({ editing: null }),
+      rows: papers.map(p => ({
+        title: p.title,
+        meta: p.author + ' \u00b7 ' + p.discipline + ' \u00b7 ' + p.tag + ' \u00b7 ' + p.issue + ' \u00b7 ' + p.pages + ' \u00b7 ' + p.date,
+        pdfLabel: p.pdf ? 'PDF \u2713' : 'No PDF',
+        pdfClass: p.pdf ? 'yes' : 'no',
+        edit: () => this.setState({ editing: p.id, notice: '', form: { title: p.title, author: p.author, discipline: p.discipline, tag: p.tag, issue: p.issue, date: p.date, pages: p.pages, abstract: p.abstract, pdf: p.pdf || null, pdfName: p.pdfName || '', pdfFile: null } }),
+        del: () => this.doDelete(p.id, p.title),
+      })),
+    };
+  }
+
+  tryUnlock() {
+    if (this.state.pw === 'paperscode2027') {
+      sessionStorage.setItem('papers_admin_auth', '1');
+      this.setState({ authed: true, pwErr: false, pw: '' });
+    } else {
+      this.setState({ pwErr: true });
+    }
+  }
+}
+</script>
+</body>
+</html>
