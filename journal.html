@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&amp;display=swap">
+  <style>
+    :root {
+      --violet: #1f3a63; --violet-dark: #16294a; --violet-text: #9db8dd;
+      --ink: #17112b; --gray: #5b5766; --gray-light: #8a8595; --line: #e7e5ee;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; color: var(--ink); background: #fff; background-image: linear-gradient(rgba(31,58,99,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(31,58,99,0.1) 1px, transparent 1px); background-size: 56px 56px; font-size: 16px; line-height: 1.7; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 40px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--violet); color: #fff; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 500; padding: 12px 26px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.15s; }
+    .btn:hover { background: var(--violet-dark); }
+    header { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; gap: 30px; height: 68px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 21px; letter-spacing: -0.01em; margin-right: auto; }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--gray); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--violet); font-weight: 600; }
+    .nav-links .btn { padding: 9px 20px; font-size: 13px; color: #fff; }
+    @media (max-width: 800px) { .nav-links a:not(.btn) { display: none; } }
+
+    /* MASTHEAD */
+    .masthead { background: #1f3a63; color: #fff; padding: 72px 0 56px; }
+    .mast-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--violet-text); display: block; margin-bottom: 14px; }
+    .masthead h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px, 5vw, 58px); font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    .mast-sub { font-size: 15.5px; color: rgba(255,255,255,0.85); max-width: 620px; line-height: 1.8; }
+    .mast-search { display: flex; gap: 10px; max-width: 620px; margin-top: 30px; }
+    .mast-input { flex: 1; font-family: 'Poppins', sans-serif; font-size: 15px; padding: 13px 18px; border: none; border-radius: 6px; color: var(--ink); }
+    .mast-input:focus { outline: 3px solid #6b9fd9; }
+    .mast-search .btn { background: #4a72b8; border: 2px solid rgba(255,255,255,0.25); }
+    .mast-search .btn:hover { background: #3d63a3; }
+    .mast-stats { display: flex; gap: 44px; margin-top: 36px; flex-wrap: wrap; }
+    .mast-stat .num { font-size: 28px; font-weight: 700; line-height: 1; }
+    .mast-stat .lbl { font-size: 11.5px; color: rgba(255,255,255,0.65); margin-top: 5px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* BROWSE */
+    .browse-band { padding: 56px 0 96px; }
+    .browse { display: grid; grid-template-columns: 240px 1fr; gap: 48px; align-items: start; }
+    @media (max-width: 860px) { .browse { grid-template-columns: 1fr; } }
+    .side { position: sticky; top: 92px; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 22px 20px; }
+    .side h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-light); margin-bottom: 12px; }
+    .side h4 + .side-list { margin-bottom: 22px; }
+    .side-list { display: flex; flex-direction: column; gap: 2px; }
+    .side-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; background: none; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--gray); padding: 7px 10px; border-radius: 6px; text-align: left; transition: background 0.12s, color 0.12s; }
+    .side-item:hover { background: #f2f6fc; color: var(--ink); }
+    .side-item.active { background: #E8F0FF; color: var(--violet); font-weight: 600; }
+    .side-count { font-size: 11.5px; color: var(--gray-light); }
+    .side-item.active .side-count { color: var(--violet); }
+
+    .results-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+    .results-count { font-size: 13.5px; color: var(--gray); }
+    .results-count strong { color: var(--ink); font-weight: 600; }
+    .issue-note { font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-light); }
+
+    .paper-list { display: flex; flex-direction: column; gap: 14px; }
+    .paper { display: block; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 24px 28px; transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+    .paper:hover { border-color: var(--violet); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(31,58,99,0.08); }
+    .paper-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+    .paper-tag { font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--violet); background: #E8F0FF; border-radius: 4px; padding: 3px 9px; }
+    .paper-disc { font-size: 11px; color: var(--gray-light); }
+    .paper h3 { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
+    .paper-authors { font-size: 13px; color: var(--gray); margin-bottom: 10px; }
+    .paper-abs { font-size: 14px; color: var(--gray); line-height: 1.75; margin-bottom: 14px; }
+    .paper-foot { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--gray-light); }
+    .paper-foot .read { color: var(--violet); font-weight: 600; font-size: 13px; margin-left: auto; }
+    .paper:hover .read { text-decoration: underline; }
+    .no-results { text-align: center; color: var(--gray); padding: 60px 0; font-size: 15px; }
+
+    /* SUBMIT CTA */
+    .submit-band { background: #E8F0FF; padding: 80px 0; text-align: center; }
+    .submit-band h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 500; line-height: 1.3; margin-bottom: 12px; }
+    .submit-band p { font-size: 15px; color: var(--gray); max-width: 560px; margin: 0 auto 28px; }
+
+    footer { background: #1f3a63; color: rgba(255,255,255,0.65); padding: 64px 0 40px; }
+    .foot { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+    .foot-logo { font-weight: 700; font-size: 18px; color: #fff; display: block; margin-bottom: 12px; }
+    .foot-desc { font-size: 13.5px; line-height: 1.8; max-width: 300px; color: rgba(255,255,255,0.7); }
+    .foot-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+    .foot-col h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
+    .foot-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 9px; transition: color 0.15s; }
+    .foot-col a:hover { color: #fff; }
+    .foot-bottom { margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; color: rgba(255,255,255,0.3); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  </style>
+</helmet>
+
+<header data-screen-label="Nav">
+  <div class="wrap">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">{{ brand }}</a>
+      <div class="nav-links">
+        <a href="journal.html" class="active">Journal</a>
+        <a href="index.html#curriculum">Curriculum</a>
+        <a href="index.html#opportunities">Opportunities</a>
+        <a href="index.html#donate">Donate</a>
+        <a href="index.html#summer">Summer</a>
+        <a href="index.html#apply" class="btn">Apply Now</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="masthead" data-screen-label="Journal Masthead">
+  <div class="wrap">
+    <span class="mast-eyebrow">The {{ brand }} Journal</span>
+    <h1>Student research, published.</h1>
+    <p class="mast-sub">Peer-reviewed papers written by high-school researchers in the {{ brand }} program — spanning mathematics, computer science, biology, policy, and more.</p>
+    <div class="mast-search">
+      <input class="mast-input" type="text" placeholder="Search papers by title, author, or topic…" value="{{ query }}" onChange="{{ onQuery }}">
+      <button class="btn">Search</button>
+    </div>
+    <div class="mast-stats">
+      <div class="mast-stat"><div class="num">{{ totalPapers }}</div><div class="lbl">Published papers</div></div>
+      <div class="mast-stat"><div class="num">7</div><div class="lbl">Disciplines</div></div>
+      <div class="mast-stat"><div class="num">2</div><div class="lbl">Issues per year</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="browse-band" data-screen-label="Browse">
+  <div class="wrap">
+    <div class="browse">
+      <aside class="side">
+        <h4>Browse by discipline</h4>
+        <div class="side-list">
+          <sc-for list="{{ discFilters }}" as="d" hint-placeholder-count="8">
+            <button class="side-item {{ d.activeClass }}" onClick="{{ d.select }}"><span>{{ d.name }}</span><span class="side-count">{{ d.count }}</span></button>
+          </sc-for>
+        </div>
+        <h4>Issue</h4>
+        <div class="side-list">
+          <sc-for list="{{ issueFilters }}" as="iss" hint-placeholder-count="3">
+            <button class="side-item {{ iss.activeClass }}" onClick="{{ iss.select }}"><span>{{ iss.name }}</span><span class="side-count">{{ iss.count }}</span></button>
+          </sc-for>
+        </div>
+      </aside>
+      <div>
+        <div class="results-head">
+          <span class="results-count"><strong>{{ shownCount }}</strong> {{ resultsWord }}</span>
+          <span class="issue-note">{{ filterLabel }}</span>
+        </div>
+        <div class="paper-list">
+          <sc-for list="{{ papers }}" as="p" hint-placeholder-count="6">
+            <a href="#" class="paper">
+              <div class="paper-top">
+                <span class="paper-tag">{{ p.tag }}</span>
+                <span class="paper-disc">{{ p.discipline }} · {{ p.issue }}</span>
+              </div>
+              <h3>{{ p.title }}</h3>
+              <p class="paper-authors">{{ p.author }}</p>
+              <p class="paper-abs">{{ p.abstract }}</p>
+              <div class="paper-foot">
+                <span>{{ p.pages }}</span>
+                <span>{{ p.date }}</span>
+                <span class="read">Read paper →</span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+          <p class="no-results">No papers match your search — try a different term or discipline.</p>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="submit-band" data-screen-label="Submit CTA">
+  <div class="wrap">
+    <h2>Have research to share?</h2>
+    <p>Fellows in the {{ brand }} program can submit their finished papers to the journal for review and publication.</p>
+    <a href="index.html#apply" class="btn">Join the program →</a>
+  </div>
+</section>
+
+<footer data-screen-label="Footer">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <span class="foot-logo">{{ brand }}</span>
+        <p class="foot-desc">We empower bright young people to start impactful research.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Fellowship</h4>
+          <a href="index.html#apply">Application</a>
+          <a href="index.html#programs">Program</a>
+          <a href="index.html#projects">Winners</a>
+          <a href="index.html#faqs">FAQs</a>
+        </div>
+        <div class="foot-col">
+          <h4>Journal</h4>
+          <a href="journal.html">Browse papers</a>
+          <a href="index.html#apply">Submit</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© {{ year }} {{ brand }}. All rights reserved.</span>
+      <span>ISSN pending</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PAPERS&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;$preview&quot;:{&quot;width&quot;:1140,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { disc: 'All', issue: 'All', query: '' };
+
+  componentDidMount() {
+    document.title = (this.props.brandName ?? 'PAPERS') + ' Journal';
+  }
+
+  papers() {
+    const abs = {
+      m1: 'We extend SIR-type epidemic models to interconnected transit networks, showing that hub-targeted intervention reduces peak infection by up to 34% in simulation.',
+      m2: 'A mathematical analysis of ranked-choice and approval voting under strategic behavior, with proposals for reform grounded in social choice theory.',
+      m3: 'We apply facility-location optimization to identify candidate sites for post-nuclear refuge bunkers, balancing population coverage against fallout exposure.',
+      m4: 'The first mechanistic forecast of future dengue prevalence, coupling climate projections with vector population dynamics.',
+      c1: 'A kinematic gait-analysis pipeline using commodity depth cameras achieves 89% accuracy in early-stage Alzheimer\u2019s screening.',
+      c2: 'We model seagrass meadow placement to maximize carbon sequestration, finding coastal-current alignment matters more than total area.',
+      c3: 'We unravel affine recurrence structures in GPT-style models to explain in-context learning behavior on algorithmic tasks.',
+      c4: 'A content recommendation algorithm that demotes misinformation while preserving engagement, evaluated on a 12k-post corpus.',
+      p1: 'Repurposing the greenhouse effect for industrial process heat, cutting fossil inputs in low-temperature manufacturing.',
+      p2: 'A feasibility study of stratospheric aerosol removal technology and its governance implications.',
+      p3: 'A proposal to amend the Outer Space Treaty to cover autonomous satellite operations and on-orbit liability.',
+      b1: 'We survey platform vaccine technologies and identify bottlenecks where targeted funding accelerates pandemic response timelines.',
+      b2: 'Mapping ecological and economic determinants of zoonotic spillover across 40 years of outbreak data.',
+      b3: 'A cost-effectiveness analysis of maternal mortality interventions across low-resource health systems.',
+      s1: 'We develop and validate a psychological scale measuring scout mindset — the disposition to seek accurate beliefs over comfortable ones.',
+      s2: 'A field-tested template for clean cookstove interventions, synthesizing evidence from 14 deployment studies.',
+      s3: 'An experimental study of how ethical argument shifts moral attitudes toward animals, with effects persisting at 30-day follow-up.',
+      ph1: 'We survey candidate quantitative measures of consciousness and assess their applicability to artificial systems.',
+      ph2: 'A normative foundation for ethical space expansion, weighing existential opportunity against governance risk.',
+      po1: 'A risk-based licensing framework for public release of frontier AI models, drawing on precedents from biosafety and aviation.',
+      po2: 'How emerging technologies reshape nuclear deterrence, and what stability-preserving policy looks like.',
+      po3: 'A policy proposal for universal DNA synthesis screening with privacy-preserving verification.',
+    };
+    const iss = ['Vol. 1 · Spring 2025', 'Vol. 1 · Fall 2025', 'Vol. 2 · Spring 2026'];
+    const P = (disc, tag, title, author, a, issue, pg) => ({ discipline: disc, tag, title, author, abstract: a, issue: iss[issue], pages: pg, date: issue === 2 ? 'May 2026' : issue === 1 ? 'Nov 2025' : 'May 2025' });
+    return [
+      P('Mathematics', 'Biosecurity', 'An Improved Epidemic Model for Interconnected Networks', 'Alex Chen', abs.m1, 2, 'pp. 1–18'),
+      P('Computer Science', 'Artificial Intelligence', 'Understanding In-Context Learning: Unraveling Affine Recurrences in GPT-style Models', 'Riley Kim', abs.c3, 2, 'pp. 19–41'),
+      P('Policy', 'Artificial Intelligence', 'A Risk-Based Licensing System for Public Release of Frontier AI Models', 'Morgan Patel', abs.po1, 2, 'pp. 42–60'),
+      P('Biology', 'Biosecurity', 'Accelerating Platform Technology Development for Pandemic Preparedness', 'Casey Rodriguez', abs.b1, 2, 'pp. 61–77'),
+      P('Philosophy', 'Artificial Intelligence', 'Proposals for Quantitative Measures of Consciousness in AI Systems', 'Quinn Davis', abs.ph1, 2, 'pp. 78–92'),
+      P('Mathematics', 'Global Health & Wellbeing', 'Developing the First Mechanistic Forecast for Future Dengue Prevalence', 'Jordan Lee', abs.m4, 1, 'pp. 1–22'),
+      P('Computer Science', 'Neurodegenerative Disease', 'Kinematic Integrated Gait Analysis for Alzheimer\u2019s Diagnosis', 'Taylor Wong', abs.c1, 1, 'pp. 23–39'),
+      P('Physics', 'Climate Change', 'Stratospheric Aerosol Removal Technology', 'Avery Martinez', abs.p2, 1, 'pp. 40–55'),
+      P('Social Science', 'Improving Decision Making', 'Developing a Psychological Scale to Measure Scout Mindset', 'Dakota Brown', abs.s1, 1, 'pp. 56–71'),
+      P('Policy', 'Nuclear War', 'New Technologies and the Future of Nuclear Deterrence', 'Sage Garcia', abs.po2, 1, 'pp. 72–88'),
+      P('Biology', 'Animal Welfare', 'Mapping Determinants of Zoonotic Spillover', 'Parker Johnson', abs.b2, 1, 'pp. 89–104'),
+      P('Mathematics', 'Improving Decision Making', 'Democratic Reform via Mathematical Analysis', 'Phoenix Anderson', abs.m2, 0, 'pp. 1–16'),
+      P('Mathematics', 'Nuclear War', 'Location Modelling for Post-Nuclear Refuge Bunkers', 'Alex Garcia', abs.m3, 0, 'pp. 17–30'),
+      P('Computer Science', 'Climate Change', 'Modelling to Maximise the Carbon Sequestration Potential of Seagrass', 'Jordan Chen', abs.c2, 0, 'pp. 31–47'),
+      P('Computer Science', 'Misinformation', 'An Anti-Misinformation Content Recommendation Algorithm', 'Casey Kim', abs.c4, 0, 'pp. 48–63'),
+      P('Physics', 'Climate Change', 'Greenhouse Effect for Good in Industrial Production', 'Morgan Lee', abs.p1, 0, 'pp. 64–78'),
+      P('Physics', 'Space Governance', 'Proposal to Amend the OST for Autonomous Satellites', 'Riley Patel', abs.p3, 0, 'pp. 79–92'),
+      P('Biology', 'Global Health & Wellbeing', 'Maternal Mortality: Where Can Resources Go Farthest?', 'Taylor Davis', abs.b3, 0, 'pp. 93–108'),
+      P('Social Science', 'Global Health & Wellbeing', 'Designing a Clean Cookstove Intervention Template', 'Avery Wong', abs.s2, 0, 'pp. 109–121'),
+      P('Social Science', 'Animal Welfare', 'The Impact of Ethical Argument on Moral Attitudes towards Animals', 'Quinn Martinez', abs.s3, 0, 'pp. 122–137'),
+      P('Philosophy', 'Space Governance', 'A Foundation for Ethical Space Expansion', 'Dakota Rodriguez', abs.ph2, 0, 'pp. 138–150'),
+      P('Policy', 'Biosecurity', 'A New Model for DNA Synthesis Screening: Policy Proposal', 'Sage Brown', abs.po3, 0, 'pp. 151–166'),
+    ];
+  }
+
+  renderVals() {
+    const brand = this.props.brandName ?? 'PAPERS';
+    const all = this.papers();
+    const discs = ['All', 'Mathematics', 'Computer Science', 'Physics', 'Biology', 'Social Science', 'Philosophy', 'Policy'];
+    const issues = ['All', 'Vol. 2 · Spring 2026', 'Vol. 1 · Fall 2025', 'Vol. 1 · Spring 2025'];
+    const q = this.state.query.trim().toLowerCase();
+    const filtered = all.filter(p =>
+      (this.state.disc === 'All' || p.discipline === this.state.disc) &&
+      (this.state.issue === 'All' || p.issue === this.state.issue) &&
+      (!q || (p.title + ' ' + p.author + ' ' + p.tag + ' ' + p.abstract).toLowerCase().includes(q))
+    );
+    const countFor = (d) => all.filter(p => d === 'All' || p.discipline === d).length;
+    const countForIssue = (i) => all.filter(p => i === 'All' || p.issue === i).length;
+    return {
+      brand,
+      year: new Date().getFullYear(),
+      totalPapers: all.length,
+      query: this.state.query,
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      discFilters: discs.map(d => ({ name: d === 'All' ? 'All disciplines' : d, count: countFor(d), activeClass: this.state.disc === d ? 'active' : '', select: () => this.setState({ disc: d }) })),
+      issueFilters: issues.map(i => ({ name: i === 'All' ? 'All issues' : i, count: countForIssue(i), activeClass: this.state.issue === i ? 'active' : '', select: () => this.setState({ issue: i }) })),
+      papers: filtered,
+      shownCount: filtered.length,
+      resultsWord: filtered.length === 1 ? 'paper' : 'papers',
+      noResults: filtered.length === 0,
+      filterLabel: (this.state.disc === 'All' ? 'All disciplines' : this.state.disc) + ' · ' + (this.state.issue === 'All' ? 'All issues' : this.state.issue),
+    };
+  }
+}
+</script>
+</body>
+</html>
