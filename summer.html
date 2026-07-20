@@ -46,14 +46,30 @@
     @media (max-width: 800px) { .nav-links a:not(.btn) { display: none; } }
 
     /* MASTHEAD */
-    .masthead { background: linear-gradient(135deg, #16294a 0%, #1f3a63 55%, #2f5490 100%); color: #fff; padding: 84px 0 0; text-align: center; }
-    .masthead h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 5.4vw, 64px); font-weight: 800; font-style: italic; line-height: 1.12; margin-bottom: 16px; }
+    .masthead { background: linear-gradient(135deg, #16294a 0%, #1f3a63 55%, #2f5490 100%); color: #fff; padding: 84px 0 80px; }
+    .mast-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center; }
+    .masthead h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px, 4.8vw, 58px); font-weight: 800; line-height: 1.12; margin-bottom: 18px; }
+    .masthead h1 .accent { color: var(--violet-text); }
     .mast-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--violet-text); display: inline-flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-    .mast-eyebrow::before, .mast-eyebrow::after { content: ''; width: 44px; height: 1px; background: rgba(255,255,255,0.35); }
-    .mast-sub { font-size: 15.5px; color: rgba(255,255,255,0.85); max-width: 640px; line-height: 1.8; margin: 0 auto; }
-    .mast-stats { display: inline-flex; gap: 56px; margin-top: 48px; flex-wrap: wrap; justify-content: center; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-bottom: none; border-radius: 12px 12px 0 0; padding: 24px 52px 26px; }
+    .mast-eyebrow::after { content: ''; width: 44px; height: 1px; background: rgba(255,255,255,0.35); }
+    .mast-sub { font-size: 15.5px; color: rgba(255,255,255,0.85); max-width: 560px; line-height: 1.8; margin: 0; }
+    .mast-points { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 22px 0 0; font-size: 15px; font-weight: 500; }
+    .mast-points li { display: flex; align-items: center; gap: 10px; }
+    .mast-points .pt-check { width: 20px; height: 20px; border-radius: 50%; background: var(--violet-text); color: var(--violet-dark); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+    .mast-stats { display: inline-flex; gap: 48px; margin-top: 34px; flex-wrap: wrap; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; padding: 22px 40px; }
     .mast-stat .num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; line-height: 1; }
     .mast-stat .lbl { font-size: 11.5px; color: rgba(255,255,255,0.65); margin-top: 6px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .mast-img image-slot { display: block; width: 100%; height: 400px; }
+    @media (max-width: 900px) { .mast-grid { grid-template-columns: 1fr; gap: 40px; } .mast-img image-slot { height: 280px; } }
+
+    /* CURRICULUM OVERVIEW */
+    .curr-band { padding: 96px 0 32px; }
+    .curr-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 60px; align-items: center; max-width: 1040px; margin: 0 auto; }
+    .curr-img image-slot { display: block; width: 100%; height: 360px; }
+    .curr-text h2 { margin-bottom: 16px; }
+    .curr-text p { font-size: 15px; color: var(--gray); line-height: 1.85; margin-bottom: 16px; }
+    .curr-text .btn { margin-top: 6px; }
+    @media (max-width: 900px) { .curr-grid { grid-template-columns: 1fr; gap: 36px; } .curr-img { order: 2; } }
 
     /* PHASES */
     .phase-band { padding: 88px 0 40px; }
@@ -103,8 +119,48 @@
     .score-total .tnum { font-size: 34px; font-weight: 700; color: var(--violet); line-height: 1; }
     .score-total .tmsg { font-size: 13px; color: var(--gray); max-width: 380px; }
 
+    /* WHO IT'S FOR (zigzag) */
+    .who-band { background: #E8F0FF; padding: 96px 0; }
+    .who-rows { display: flex; flex-direction: column; gap: 64px; max-width: 940px; margin: 0 auto; }
+    .who-row { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .who-text { font-size: 20px; font-weight: 600; line-height: 1.55; color: var(--ink); }
+    .pill-wrap { display: flex; justify-content: center; }
+    .pill { background: #fff; border-radius: 999px; padding: 14px 34px 14px 14px; display: inline-flex; align-items: center; gap: 20px; box-shadow: 0 14px 34px rgba(23,17,43,0.1), -14px -14px 0 var(--pc, #9db8dd); }
+    .who-row.rev .pill { box-shadow: 0 14px 34px rgba(23,17,43,0.1), 14px 14px 0 var(--pc, #9db8dd); }
+    .pill img { width: 108px; height: 108px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .pill h4 { font-size: 22px; font-weight: 600; margin-bottom: 2px; }
+    .pill p { font-size: 13.5px; color: var(--gray); line-height: 1.5; max-width: 190px; }
+    @media (max-width: 800px) {
+      .who-row, .who-row.rev { grid-template-columns: 1fr; gap: 28px; }
+      .who-row.rev .pill-wrap { order: 2; }
+    }
+
+    /* COMPARISON */
+    .comp-band { background: #E8F0FF; padding: 96px 0; }
+    .comp-scroll { overflow-x: auto; }
+    .comp-table { width: 100%; max-width: 900px; margin: 0 auto; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 14px 40px rgba(23,17,43,0.1); font-size: 14px; min-width: 640px; }
+    .comp-table th, .comp-table td { padding: 15px 20px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .comp-table thead th { background: var(--violet); color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; border-bottom: none; }
+    .comp-table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .comp-table td:nth-child(2) { color: var(--gray); }
+    .comp-table td:last-child { background: #f3f7ff; color: var(--violet-dark); font-weight: 500; }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-note { max-width: 720px; margin: 30px auto 0; text-align: center; font-size: 15px; color: var(--gray); line-height: 1.85; }
+    .comp-note strong { color: var(--ink); font-weight: 600; }
+
+    /* TRACKS */
+    .track-band { padding: 96px 0 0; }
+    .tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 860px) { .tracks { grid-template-columns: 1fr; } }
+    .track { border: 2.5px solid #111; border-radius: 8px; padding: 30px 26px; background: #fff; }
+    .track-2 { background: #6b9fd9; color: #fff; }
+    .track-3 { background: #1f3a63; color: #fff; }
+    .track-num { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-bottom: 10px; opacity: 0.75; }
+    .track h3 { font-size: 21px; font-weight: 600; line-height: 1.35; margin-bottom: 10px; }
+    .track p { font-size: 14px; line-height: 1.7; opacity: 0.9; }
+
     /* METHODS */
-    .meth-band { padding: 96px 0; }
+    .meth-band { padding: 88px 0 96px; }
     .meth-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 900px; margin: 0 auto; }
     @media (max-width: 720px) { .meth-grid { grid-template-columns: 1fr; } }
     .meth-card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 26px 28px; }
@@ -159,15 +215,76 @@
   </div>
 </header>
 
-<section class="masthead" data-screen-label="Curriculum Masthead">
+<section class="masthead" data-screen-label="Summer Masthead">
   <div class="wrap">
-    <span class="mast-eyebrow">The {{ brand }} Summer Program</span>
-    <h1>From first idea to final symposium.</h1>
-    <p class="mast-sub">A guided path through a complete research project — no experience required. You'll brainstorm, read real papers, design your methods, write, revise, and present your work, with a mentor beside you the whole way.</p>
-    <div class="mast-stats">
-      <div class="mast-stat"><div class="num">11</div><div class="lbl">Sessions</div></div>
-      <div class="mast-stat"><div class="num">3</div><div class="lbl">Phases</div></div>
-      <div class="mast-stat"><div class="num">1</div><div class="lbl">Finished paper</div></div>
+    <div class="mast-grid">
+      <div>
+        <span class="mast-eyebrow">Summer Program</span>
+        <h1>Your first research experience, <span class="accent">free</span></h1>
+        <p class="mast-sub">A guided path through a complete research project, taught by experienced researchers. You'll brainstorm, read real papers, design your methods, write, revise, and present your work, with a mentor beside you the whole way.</p>
+        <ul class="mast-points">
+          <li><span class="pt-check">✓</span> Taught by experienced student researchers</li>
+          <li><span class="pt-check">✓</span> No experience required</li>
+          <li><span class="pt-check">✓</span> Completely free</li>
+        </ul>
+        <div class="mast-stats">
+          <div class="mast-stat"><div class="num">11</div><div class="lbl">Sessions</div></div>
+          <div class="mast-stat"><div class="num">3</div><div class="lbl">Phases</div></div>
+          <div class="mast-stat"><div class="num">1</div><div class="lbl">Finished paper</div></div>
+        </div>
+      </div>
+      <div class="mast-img">
+        <img src="uploads/summer-zoom-1.jpg" alt="Four Papers students giving a thumbs up on a Zoom session" style="width: 100%; height: 400px; object-fit: cover; border-radius: 14px; display: block; box-shadow: 0 18px 50px rgba(0,0,0,0.3);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="curr-band" data-screen-label="Curriculum Overview">
+  <div class="wrap">
+    <div class="curr-grid">
+      <div class="curr-img">
+        <img src="uploads/summer-zoom-2.jpg" alt="A Papers mentor meeting with students over Zoom" style="width: 100%; height: 360px; object-fit: cover; border-radius: 14px; display: block; box-shadow: 0 12px 34px rgba(23,17,43,0.12);">
+      </div>
+      <div class="curr-text">
+        <span class="eyebrow">The curriculum</span>
+        <h2 class="sec">A complete research project, one session at a time</h2>
+        <p>Eleven guided sessions walk you through the full arc of real research: finding a question you care about, reading and analyzing the literature, designing a methodology you can actually pull off, then writing, revising, and presenting a finished paper.</p>
+        <p>Every session pairs teaching with hands-on work: worksheets for methods and outlines, peer feedback in small working groups, and take-home steps that keep your project moving between meetings.</p>
+        <a href="curriculum.html" class="btn">Explore the full curriculum →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="who-band" data-screen-label="Who It's For">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Who it's for</span>
+      <h2 class="sec">Made for students who want to...</h2>
+    </div>
+    <div class="who-rows">
+      <div class="who-row">
+        <p class="who-text">Some questions don't have answers you can look up. Your mentor helps you chase yours somewhere real.</p>
+        <div class="pill-wrap"><div class="pill" style="--pc: #9db8dd">
+          <img src="images/pill-chase.webp" alt="A student presenting research">
+          <div><h4>Chase</h4><p>the questions you can't stop asking</p></div>
+        </div></div>
+      </div>
+      <div class="who-row rev">
+        <div class="pill-wrap"><div class="pill" style="--pc: #6b9fd9">
+          <img src="images/pill-build.webp" alt="A student presenting a project">
+          <div><h4>Build</h4><p>projects people can see, share, and use</p></div>
+        </div></div>
+        <p class="who-text">Papers, posters, presentations, science-fair projects: the outcome follows your vision.</p>
+      </div>
+      <div class="who-row">
+        <p class="who-text">Our most ambitious students don't just study knowledge. They add to it.</p>
+        <div class="pill-wrap"><div class="pill" style="--pc: #1f3a63">
+          <img src="images/pill-contribute.webp" alt="A student presenting in a library">
+          <div><h4>Contribute</h4><p>research that pushes boundaries and leaves a mark</p></div>
+        </div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -267,12 +384,38 @@
   </div>
 </section>
 
+<section class="track-band" data-screen-label="Tracks">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Choose your track</span>
+      <h2 class="sec">Three tracks, one program</h2>
+      <p>Every project starts from what you already love. Pick the track that matches it.</p>
+    </div>
+    <div class="tracks">
+      <div class="track track-1">
+        <span class="track-num">AI Track</span>
+        <h3>Build with artificial intelligence</h3>
+        <p>Train and evaluate models, analyze datasets, and explore how AI can answer questions in any field you care about.</p>
+      </div>
+      <div class="track track-2">
+        <span class="track-num">Humanities Track</span>
+        <h3>Argue something that matters</h3>
+        <p>Build literature reviews and analytical papers in history, philosophy, policy, literature, and culture.</p>
+      </div>
+      <div class="track track-3">
+        <span class="track-num">STEM Track</span>
+        <h3>Test how the world works</h3>
+        <p>Design experimental and observational studies in biology, physics, math, engineering, and beyond.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="meth-band" data-screen-label="Methods">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Every track welcome</span>
+      <span class="eyebrow">Study designs</span>
       <h2 class="sec">Pick the study design that fits you</h2>
-      <p>Whether you're into science, math, or the humanities, there's a pathway — and worksheets to walk you through variables, data, feasibility, ethics, and bias.</p>
     </div>
     <div class="meth-grid">
       <div class="meth-card">
@@ -298,7 +441,6 @@
 <section class="sup-band" data-screen-label="Support">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow" style="color: #9db8dd">You're not alone</span>
       <h2 class="sec" style="color: #fff">Built-in support at every step</h2>
     </div>
     <div class="sup-grid">
@@ -321,6 +463,31 @@
   </div>
 </section>
 
+<section class="comp-band" data-screen-label="Comparison">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The difference</span>
+      <h2 class="sec">Not all research programs are created equal</h2>
+      <p>Most programs give every student the same path. {{ brand }} builds yours from scratch.</p>
+    </div>
+    <div class="comp-scroll">
+      <table class="comp-table">
+        <thead>
+          <tr><th></th><th>Other programs</th><th>{{ brand }}</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Project direction</td><td>Assigned or preselected topics</td><td>You choose your own research question</td></tr>
+          <tr><td>Outcome</td><td>Another school project</td><td>Real research and novel ideas</td></tr>
+          <tr><td>Scheduling</td><td>Fixed times and dates</td><td>Flexible, with sessions that work for international students</td></tr>
+          <tr><td>Mentorship</td><td>Group or occasional check-ins</td><td>1-on-1 with an experienced high school researcher</td></tr>
+          <tr><td>Student ownership</td><td>A fill-in-the-blanks template</td><td>You drive every decision, with guidance</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="comp-note"><strong>Our mentors are high schoolers, and that matters:</strong> nobody can speak to students better than other students. Every mentor has experience tutoring and mentoring, and all of them volunteer because they love sharing research.</p>
+  </div>
+</section>
+
 <section class="cta-band" id="apply" data-screen-label="Apply Now">
   <div class="wrap">
     <span class="eyebrow" style="text-align: center;">Apply Now</span>
@@ -333,7 +500,7 @@
         <div style="background: #E8F0FF; border-radius: 8px; padding: 14px 22px; text-align: center;"><div style="font-size: 14px; font-weight: 600;">14–20</div><div style="font-size: 9.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8595;">Ages</div></div>
         <div style="background: #E8F0FF; border-radius: 8px; padding: 14px 22px; text-align: center;"><div style="font-size: 14px; font-weight: 600;">45 min</div><div style="font-size: 9.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8595;">Application</div></div>
       </div>
-      <a href="#apply" class="btn">Start your application →</a>
+      <a href="index.html#newsletter" class="btn">Start your application →</a>
       <p style="margin: 0; font-size: 12px; color: #8a8595;">No wrong answers — we want to see how you think.</p>
     </div>
   </div>
@@ -344,7 +511,7 @@
     <div class="foot">
       <div>
         <span class="foot-logo">{{ brand }}</span>
-        <p class="foot-desc">We empower bright young people to start impactful research.</p>
+        <p class="foot-desc">Free research mentorship for high schoolers, from first question to published paper. By students, for students.</p>
       </div>
       <div class="foot-cols">
         <div class="foot-col">
@@ -356,7 +523,7 @@
         <div class="foot-col">
           <h4>Journal</h4>
           <a href="journal.html">Browse papers</a>
-          <a href="index.html#apply">Submit</a>
+          <a href="index.html#newsletter">Submit</a>
         </div>
       </div>
     </div>
@@ -367,16 +534,16 @@
   </div>
 </footer>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PAPERS&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;$preview&quot;:{&quot;width&quot;:1140,&quot;height&quot;:900}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Papers&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;$preview&quot;:{&quot;width&quot;:1140,&quot;height&quot;:900}}">
 class Component extends DCLogic {
   state = { open: 0, scores: { curiosity: 0, feasibility: 0, trackfit: 0, novelty: 0 } };
 
   componentDidMount() {
-    document.title = (this.props.brandName ?? 'PAPERS') + ' — Curriculum';
+    document.title = (this.props.brandName ?? 'Papers') + ' — Summer Program';
   }
 
   renderVals() {
-    const brand = this.props.brandName ?? 'PAPERS';
+    const brand = this.props.brandName ?? 'Papers';
     const raw = [
       { phase: 'Phase 1 · Initial Research', title: 'Introductory Meeting', desc: 'Full-group kickoff: how the program works, what\u2019s expected of you, and meeting your mentors. Then we jump straight into ideating.', hw: 'Brain-dump at least five research ideas \u2014 anything you\u2019ve ever been super curious about \u2014 then score them on the Idea Scoreboard and share your favorite with a friend or parent.' },
       { phase: 'Phase 1 · Initial Research', title: 'Brainstorming & Parts of a Research Paper', desc: 'Narrow your ideas into a real research question, and take apart a paper to see how it\u2019s built: abstract, intro, methods, results, discussion.', hw: 'Pick your winning idea and draft your research question.' },
