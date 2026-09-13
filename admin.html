@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +12,16 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" href="favicon-180.png">
+  <meta name="description" content="Administrative tools for managing papers published in the Papers student journal.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Papers">
+  <meta property="og:title" content="Papers - Admin">
+  <meta property="og:description" content="Administrative tools for managing papers published in the Papers student journal.">
+  <meta property="og:image" content="favicon-180.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Papers - Admin">
+  <meta name="twitter:description" content="Administrative tools for managing papers published in the Papers student journal.">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap">
@@ -178,6 +188,7 @@
               <label>Issue</label>
               <select value="{{ fIssue }}" onChange="{{ setIssue }}">
                 <option value="Vol. 2 · 2026 Cohort">Vol. 2 · 2026 Cohort</option>
+                <option value="2026 Summer Cohort">2026 Summer Cohort</option>
                 <option value="Vol. 1 · Fall 2025">Vol. 1 · Fall 2025</option>
                 <option value="Vol. 1 · Spring 2025">Vol. 1 · Spring 2025</option>
               </select>
@@ -244,7 +255,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
-    document.title = (this.props.brandName ?? 'Papers') + ' \u2014 Admin';
+    document.title = (this.props.brandName ?? 'Papers') + ' - Admin';
     this.setState({ authed: sessionStorage.getItem('papers_admin_auth') === '1' });
     import('./journal-data.js').then(m => { this.mod = m; this.refresh(); });
   }
