@@ -6,8 +6,8 @@
   var TARGET_HREFS = ['summer.html#apply', '#apply'];
 
   var css = [
-    '.pam-overlay { position: fixed; inset: 0; background: rgba(23,17,43,0.55); backdrop-filter: blur(3px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.18s ease; }',
-    '.pam-overlay.pam-open { opacity: 1; }',
+    '.pam-overlay { position: fixed; inset: 0; background: rgba(23,17,43,0.55); backdrop-filter: blur(3px); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.18s ease, visibility 0.18s; visibility: hidden; pointer-events: none; }',
+    '.pam-overlay.pam-open { opacity: 1; visibility: visible; pointer-events: auto; }',
     '.pam-card { background: #fff; border-radius: 14px; max-width: 440px; width: 100%; padding: 34px 32px 30px; box-shadow: 0 24px 60px rgba(23,17,43,0.28); font-family: "Poppins", sans-serif; color: #17112b; position: relative; transform: translateY(10px); transition: transform 0.18s ease; text-align: center; }',
     '.pam-overlay.pam-open .pam-card { transform: translateY(0); }',
     '.pam-close { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border: none; background: transparent; color: #8a8595; font-size: 20px; line-height: 1; cursor: pointer; border-radius: 6px; }',
